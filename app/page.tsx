@@ -55,7 +55,7 @@ export default function Home() {
           <div className="container px-4 md:px-6 lg:px-12">
             <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
               <div className="space-y-4">
-                <h2 className="text-3xl font-bold tracking-tighter">How Spotter Labs Booking Works</h2>
+                <h2 className="text-3xl font-bold tracking-tighter">How Booking Works</h2>
                 <p className="text-muted-foreground md:text-xl">
                   Spotter Labs WS booking helps you find and reserve available hot desks based on your cluster
                   assignment.
