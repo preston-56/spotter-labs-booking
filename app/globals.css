@@ -113,11 +113,6 @@
 }
 
 @layer base {
-  :root {
-    --primary: 197 95% 17%; /* HSL equivalent of rgb(4, 65, 82) */
-    --primary-foreground: 0 0% 100%;
-    /* Add any additional custom variables here */
-  }
   * {
     @apply border-border outline-ring/50;
   }
