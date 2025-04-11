@@ -9,7 +9,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Spotter WS-Booking",
+  title: "Spotter Labs WS| Booking",
   description:
     "Spotter WS-Booking: Effortlessly manage desk bookings and optimize workspace scheduling."
 };
