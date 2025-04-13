@@ -5,6 +5,11 @@ import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
+import { ModeToggle } from "@/components/mode-toggle";
+
+import Link from "next/link";
+import Image from "next/image";
+import { HeaderButtons } from "@/components/header-buttons";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({
@@ -25,7 +30,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
         <SidebarProvider>
           <ThemeProvider
             attribute="class"
@@ -35,9 +42,35 @@ export default function RootLayout({
           >
             <div className="flex min-h-screen w-full">
               <AppSidebar />
-              <div className="flex-1">
-                <SidebarTrigger />
-                {children}
+              <div className="flex flex-1 flex-col">
+                <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+                  <div className="flex h-14 items-center justify-between px-4 lg:px-12">
+                    <div className="mr-4 flex items-center space-x-2">
+                      <SidebarTrigger />
+                      <Link
+                        href="/"
+                        className="mr-6 flex items-center space-x-2"
+                      >
+                        <Image
+                          src="/images/spotter.png"
+                          alt="Spotter Labs Logo"
+                          width={40}
+                          height={40}
+                          className="rounded-full"
+                        />
+                        <span className="font-bold">Spotter Labs</span>
+                      </Link>
+                    </div>
+
+                    <div className="flex items-center space-x-4 ml-auto">
+                      <HeaderButtons />
+                      <ModeToggle />
+                    </div>
+                  </div>
+                </header>
+
+                {/* Page Content */}
+                <div className="flex-1">{children}</div>
               </div>
             </div>
           </ThemeProvider>
