@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import Link from "next/link"
 import { Building, Calendar, ClipboardList, Users } from "lucide-react"
+import { ModeToggle } from "@/components/mode-toggle"
 
 export default function Home() {
   return (
@@ -22,9 +23,12 @@ export default function Home() {
                  Bookings
               </Link>
             </nav>
-            <Button variant="outline" asChild>
-              <Link href="/login">Login</Link>
-            </Button>
+            <div className="flex items-center space-x-6">
+              <Button variant="outline" asChild>
+                <Link href="/login">Login</Link>
+              </Button>
+              <ModeToggle />
+            </div>
           </div>
         </div>
       </header>
