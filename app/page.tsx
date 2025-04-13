@@ -2,36 +2,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 import { Building, Calendar, ClipboardList, Users } from "lucide-react";
-import { ModeToggle } from "@/components/mode-toggle";
-import Image from "next/image";
 
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-14 items-center justify-between px-4 lg:px-12">
-          <div className="mr-4 flex">
-            <Link href="/" className="mr-6 flex items-center space-x-2">
-              <Image
-                src="/images/spotter.png"
-                alt="Spotter Labs Logo"
-                width={40}
-                height={40}
-                className="rounded-full"
-              />
-              <span className="font-bold">Spotter Labs</span>
-            </Link>
-          </div>
-          <div className="flex flex-1 items-center justify-end space-x-2">
-            <div className="flex items-center space-x-6">
-              <Button variant="outline" asChild>
-                <Link href="/login">Login</Link>
-              </Button>
-              <ModeToggle />
-            </div>
-          </div>
-        </div>
-      </header>
       <main className="flex-1">
         <section className="w-full py-12 md:py-24 lg:py-32 bg-muted">
           <div className="container px-4 md:px-6 lg:px-12">
