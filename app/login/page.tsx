@@ -54,7 +54,7 @@ export default function LoginPage() {
         <CardHeader className="space-y-1">
           <div className="flex justify-center mb-4">
             <Image
-              src="/placeholder.svg"
+              src="/images/spotter.png"
               alt="Spotter Logo"
               width={80}
               height={80}
