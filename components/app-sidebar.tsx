@@ -1,5 +1,4 @@
 import {
-  Calendar,
   LayoutGrid,
   Search,
   Settings,
@@ -29,11 +28,6 @@ const items = [
     title: "Bookings",
     url: "/bookings",
     icon: FolderCheck
-  },
-  {
-    title: "Calendar",
-    url: "/calendar",
-    icon: Calendar
   },
   {
     title: "Search",
