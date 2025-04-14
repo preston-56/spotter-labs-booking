@@ -10,6 +10,7 @@ import { ModeToggle } from "@/components/mode-toggle";
 import Link from "next/link";
 import Image from "next/image";
 import { HeaderButtons } from "@/components/header-buttons";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({
@@ -73,6 +74,16 @@ export default function RootLayout({
                 <div className="flex-1">{children}</div>
               </div>
             </div>
+            <Toaster
+              position="top-center"
+              toastOptions={{
+                className: "rounded-md shadow-lg",
+                style: {
+                  background: "#38B2AC",
+                  color: "#111827"
+                }
+              }}
+            />
           </ThemeProvider>
         </SidebarProvider>
       </body>
