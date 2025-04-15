@@ -8,8 +8,8 @@ import {
 
 export function DataFlowDiagram() {
   return (
-    <div className="space-y-8">
-      <Card>
+    <div className="flex flex-col sm:flex-col md:flex-row gap-4 items-stretch">
+      <Card className="flex-1">
         <CardHeader>
           <CardTitle>Admin User Data Flow</CardTitle>
           <CardDescription>
@@ -62,14 +62,14 @@ export function DataFlowDiagram() {
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className="flex-[1.25]">
         <CardHeader>
           <CardTitle>Booking Process Data Flow</CardTitle>
           <CardDescription>How users book workstations</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="rounded-lg border p-4">
-            <div className="flex flex-col items-center space-y-4">
+            <div className="flex flex-col items-center space-y-0.5 px-6">
               <div className="rounded-full bg-primary/10 p-4">
                 <div className="text-primary">User</div>
               </div>
