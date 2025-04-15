@@ -14,44 +14,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { Badge } from "@/components/ui/badge";
 import { format } from "date-fns";
 import { Building, CalendarIcon, Clock, MapPin, Users } from "lucide-react";
-
-// Mock data for bookings
-const mockBookings = [
-  {
-    id: "booking1",
-    date: new Date(2025, 3, 10),
-    timeSlot: "09:00 - 10:00",
-    cluster: "HR",
-    floor: "Floor 1",
-    workstation: "Workstation 2",
-    hotDesk: "HD 1"
-  },
-  {
-    id: "booking2",
-    date: new Date(2025, 3, 12),
-    timeSlot: "14:00 - 15:00",
-    cluster: "IT & Facilities",
-    floor: "Floor 3",
-    workstation: "Workstation 1",
-    hotDesk: "HD 2"
-  }
-];
-
-// Mock data for available workstations
-const availableWorkstations = {
-  "Floor 1": 15,
-  "Floor 2": 10,
-  "Floor 3": 20,
-};
-
-// Mock data for cluster utilization
-const clusterUtilization = [
-  { name: "General Direction", booked: 6, total: 15 },
-  { name: "HR", booked: 10, total: 25 },
-  { name: "Comms & Fundraising", booked: 5, total: 15 },
-  { name: "IT & Facilities", booked: 7, total: 10 },
-  { name: "Finance", booked: 4, total: 10 }
-];
+import { availableWorkstations, clusterUtilization, mockBookings } from "@/mocks/data";
 
 export default function DashboardPage() {
   const [date, setDate] = useState<Date | undefined>(new Date());
