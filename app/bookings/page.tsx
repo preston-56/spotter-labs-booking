@@ -1,5 +1,5 @@
-import { BookingsCalendarView } from "@/components/bookings-calendar-view"
-import { BookingsHeader } from "@/components/bookings-header"
+import { BookingsCalendarView } from "@/components/booking/bookings-calendar-view"
+import { BookingsHeader } from "@/components/booking/bookings-header"
 
 export default function BookingsPage() {
   return (
