@@ -13,8 +13,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Calendar } from "@/components/ui/calendar";
 import { Badge } from "@/components/ui/badge";
 import { format } from "date-fns";
-import { Building, CalendarIcon, Clock, MapPin, Users } from "lucide-react";
+import { Building, CalendarIcon, Clock, Info, MapPin, Users } from "lucide-react";
 import { availableWorkstations, clusterUtilization, mockBookings } from "@/mocks/data";
+import { DataFlowDiagram } from "@/components/data-flow-diagram";
 
 export default function DashboardPage() {
   const [date, setDate] = useState<Date | undefined>(new Date());
@@ -28,6 +29,7 @@ export default function DashboardPage() {
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="bookings">Bookings</TabsTrigger>
           <TabsTrigger value="availability">Availability</TabsTrigger>
+          <TabsTrigger value="system">System Flow</TabsTrigger>
         </TabsList>
 
         <TabsContent value="overview" className="space-y-6">
@@ -316,6 +318,25 @@ export default function DashboardPage() {
               </CardContent>
             </Card>
           </div>
+        </TabsContent>
+
+        <TabsContent value="system" className="space-y-6">
+          <Card className="mb-6">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <div>
+                <CardTitle>System Architecture</CardTitle>
+                <CardDescription>Understanding the workstation booking system</CardDescription>
+              </div>
+              <Info className="h-5 w-5 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground mb-6">
+                These diagrams illustrate how data flows through the workstation booking system, from user interactions
+                to database operations.
+              </p>
+              <DataFlowDiagram />
+            </CardContent>
+          </Card>
         </TabsContent>
       </Tabs>
     </div>
