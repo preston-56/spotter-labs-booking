@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 import { Building, Calendar, ClipboardList, Users } from "lucide-react";
+import Footer from "@/components/footer/footer";
 
 export default function Home() {
   return (
@@ -140,9 +141,7 @@ export default function Home() {
       </main>
       <footer className="border-t py-6 md:py-0">
         <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
-          <p className="text-center px-4 text-sm leading-loose text-muted-foreground md:text-left">
-            © 2025 Spotter Labs. All rights reserved.
-          </p>
+          <Footer companyName="Spotter Labs" />
         </div>
       </footer>
     </div>
