@@ -1,6 +1,5 @@
 import {
   LayoutGrid,
-  Search,
   Settings,
   FolderCheck
 } from "lucide-react";
@@ -28,11 +27,6 @@ const items = [
     title: "Bookings",
     url: "/bookings",
     icon: FolderCheck
-  },
-  {
-    title: "Search",
-    url: "/search",
-    icon: Search
   },
   {
     title: "Settings",
