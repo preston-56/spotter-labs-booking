@@ -16,13 +16,17 @@ import { format } from "date-fns";
 import { Building, CalendarIcon, Clock, Info, MapPin, Users } from "lucide-react";
 import { availableWorkstations, clusterUtilization, mockBookings } from "@/mocks/data";
 import { DataFlowDiagram } from "@/components/data-flow-diagram";
+import { SearchBar } from "@/components/search/search-bar";
 
 export default function DashboardPage() {
   const [date, setDate] = useState<Date | undefined>(new Date());
 
   return (
     <div className="container mx-auto py-10 px-4">
-      <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
+     <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 gap-4">
+        <h1 className="text-3xl font-bold">Dashboard</h1>
+        <SearchBar />
+      </div>
 
       <Tabs defaultValue="overview" className="space-y-6">
         <TabsList>
