@@ -1,3 +1,5 @@
+import { StatsData, ClusterData, FloorAvailabilityData, FloorWorkstations, Booking } from "@/types/booking";
+
 // Mock data for bookings
 export const mockBookings = [
     {
@@ -53,6 +55,14 @@ export const mockBookings = [
     { name: "IT & Facilities", booked: 7, total: 10 },
     { name: "Finance", booked: 4, total: 10 }
   ];
+
+// Dashboard stats data
+export const statsData: StatsData = {
+  totalBookings: { value: "24", subtext: "+5% from last week" },
+  availableWorkstations: { value: "35", subtext: "Across all floors" },
+  utilizationRate: { value: "65%", subtext: "+10% from last month" },
+  peakHours: { value: "10:00 - 14:00", subtext: "Highest booking demand" }
+};
 
   // Mock data for clusters
 export const clusters = [
