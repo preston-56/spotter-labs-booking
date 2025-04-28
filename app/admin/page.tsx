@@ -1,6 +1,5 @@
 "use client"
 
-import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -8,219 +7,59 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { useToast } from "@/hooks/use-sonner"
 import { PlusCircle, Trash2 } from "lucide-react"
-
-// Mock data for clusters
-const initialClusters = [
-  { id: "01", name: "General Direction", size: 15 },
-  { id: "02", name: "HR", size: 25 },
-  { id: "03", name: "Comms & Fundraising", size: 15 },
-  { id: "04", name: "IT & Facilities", size: 10 },
-  { id: "05", name: "Finance", size: 10 },
-]
-
-// Mock data for floors
-const initialFloors = [
-  { id: "floor1", name: "Floor 1" },
-  { id: "floor2", name: "Floor 2" },
-  { id: "floor3", name: "Floor 3" },
-]
-
-// Mock data for workstations
-const initialWorkstations = [
-  { id: "ws1", floor: "Floor 1", name: "Workstation 1", hotDesks: 5 },
-  { id: "ws2", floor: "Floor 1", name: "Workstation 2", hotDesks: 5 },
-  { id: "ws3", floor: "Floor 1", name: "Workstation 3", hotDesks: 4 },
-  { id: "ws4", floor: "Floor 2", name: "Workstation 1", hotDesks: 4 },
-  { id: "ws5", floor: "Floor 2", name: "Workstation 2", hotDesks: 3 },
-  { id: "ws6", floor: "Floor 3", name: "Workstation 1", hotDesks: 6 },
-  { id: "ws7", floor: "Floor 3", name: "Workstation 2", hotDesks: 7 },
-  { id: "ws8", floor: "Floor 3", name: "Workstation 3", hotDesks: 5 },
-  { id: "ws9", floor: "Floor 3", name: "Workstation 4", hotDesks: 8 },
-]
-
-// Mock data for users
-const initialUsers = [
-  { id: "user1", name: "Preston Osoro", email: "preston.osoro@spotter.org", cluster: "HR" },
-  { id: "user2", name: "Jane Smith", email: "jane.smith@spotter.org", cluster: "Finance" },
-  { id: "user3", name: "Bob Johnson", email: "bob.johnson@spotter.org", cluster: "IT & Facilities" },
-  { id: "user4", name: "Alice Brown", email: "alice.brown@spotter.org", cluster: "Comms & Fundraising" },
-  { id: "user5", name: "Charlie Wilson", email: "charlie.wilson@spotter.org", cluster: "General Direction" },
-]
+import { useClusters } from "@/hooks/use-clusters"
+import { useFloors } from "@/hooks/use-floors"
+import { useWorkstations } from "@/hooks/use-workstations"
+import { useUsers } from "@/hooks/use-users"
 
 export default function AdminPage() {
-  const [clusters, setClusters] = useState(initialClusters)
-  const [floors, setFloors] = useState(initialFloors)
-  const [workstations, setWorkstations] = useState(initialWorkstations)
-  const [users, setUsers] = useState(initialUsers)
+  const {
+    clusters,
+    newClusterName,
+    setNewClusterName,
+    addCluster,
+    deleteCluster,
+  } = useClusters()
 
-  const [newClusterName, setNewClusterName] = useState("")
-  const [newClusterSize, setNewClusterSize] = useState("")
+  const {
+    floors,
+    newFloorName,
+    setNewFloorName,
+    addFloor,
+    deleteFloor,
+  } = useFloors()
 
-  const [newFloorName, setNewFloorName] = useState("")
+  const {
+    workstations,
+    newWorkstationName,
+    setNewWorkstationName,
+    newWorkstationFloor,
+    setNewWorkstationFloor,
+    newWorkstationHotDesks,
+    setNewWorkstationHotDesks,
+    addWorkstation,
+    deleteWorkstation,
+  } = useWorkstations()
 
-  const [newWorkstationFloor, setNewWorkstationFloor] = useState("")
-  const [newWorkstationName, setNewWorkstationName] = useState("")
-  const [newWorkstationHotDesks, setNewWorkstationHotDesks] = useState("")
-
-  const [newUserName, setNewUserName] = useState("")
-  const [newUserEmail, setNewUserEmail] = useState("")
-  const [newUserCluster, setNewUserCluster] = useState("")
-
-  const { toast } = useToast()
-
-  // Add new cluster
-  const handleAddCluster = () => {
-    if (!newClusterName || !newClusterSize) {
-      toast({
-        title: "Error",
-        description: "Please fill in all fields",
-        variant: "destructive",
-      })
-      return
-    }
-
-    const newCluster = {
-      id: `cluster${clusters.length + 1}`,
-      name: newClusterName,
-      size: Number.parseInt(newClusterSize),
-    }
-
-    setClusters([...clusters, newCluster])
-    setNewClusterName("")
-    setNewClusterSize("")
-
-    toast({
-      title: "Success",
-      description: "Cluster added successfully",
-    })
-  }
-
-  // Add new floor
-  const handleAddFloor = () => {
-    if (!newFloorName) {
-      toast({
-        title: "Error",
-        description: "Please enter a floor name",
-        variant: "destructive",
-      })
-      return
-    }
-
-    const newFloor = {
-      id: `floor${floors.length + 1}`,
-      name: newFloorName,
-    }
-
-    setFloors([...floors, newFloor])
-    setNewFloorName("")
-
-    toast({
-      title: "Success",
-      description: "Floor added successfully",
-    })
-  }
-
-  // Add new workstation
-  const handleAddWorkstation = () => {
-    if (!newWorkstationFloor || !newWorkstationName || !newWorkstationHotDesks) {
-      toast({
-        title: "Error",
-        description: "Please fill in all fields",
-        variant: "destructive",
-      })
-      return
-    }
-
-    const newWorkstation = {
-      id: `ws${workstations.length + 1}`,
-      floor: newWorkstationFloor,
-      name: newWorkstationName,
-      hotDesks: Number.parseInt(newWorkstationHotDesks),
-    }
-
-    setWorkstations([...workstations, newWorkstation])
-    setNewWorkstationName("")
-    setNewWorkstationHotDesks("")
-
-    toast({
-      title: "Success",
-      description: "Workstation added successfully",
-    })
-  }
-
-  // Add new user
-  const handleAddUser = () => {
-    if (!newUserName || !newUserEmail || !newUserCluster) {
-      toast({
-        title: "Error",
-        description: "Please fill in all fields",
-        variant: "destructive",
-      })
-      return
-    }
-
-    const newUser = {
-      id: `user${users.length + 1}`,
-      name: newUserName,
-      email: newUserEmail,
-      cluster: newUserCluster,
-    }
-
-    setUsers([...users, newUser])
-    setNewUserName("")
-    setNewUserEmail("")
-    setNewUserCluster("")
-
-    toast({
-      title: "Success",
-      description: "User added successfully",
-    })
-  }
-
-  // Delete cluster
-  const handleDeleteCluster = (id: string) => {
-    setClusters(clusters.filter((cluster) => cluster.id !== id))
-    toast({
-      title: "Success",
-      description: "Cluster deleted successfully",
-    })
-  }
-
-  // Delete floor
-  const handleDeleteFloor = (id: string) => {
-    setFloors(floors.filter((floor) => floor.id !== id))
-    toast({
-      title: "Success",
-      description: "Floor deleted successfully",
-    })
-  }
-
-  // Delete workstation
-  const handleDeleteWorkstation = (id: string) => {
-    setWorkstations(workstations.filter((workstation) => workstation.id !== id))
-    toast({
-      title: "Success",
-      description: "Workstation deleted successfully",
-    })
-  }
-
-  // Delete user
-  const handleDeleteUser = (id: string) => {
-    setUsers(users.filter((user) => user.id !== id))
-    toast({
-      title: "Success",
-      description: "User deleted successfully",
-    })
-  }
+  const {
+    users,
+    newUserName,
+    setNewUserName,
+    newUserEmail,
+    setNewUserEmail,
+    newUserCluster,
+    setNewUserCluster,
+    addUser,
+    deleteUser,
+  } = useUsers()
 
   return (
-    <div className="container mx-auto py-10">
+    <div className="container mx-auto px-4 py-10">
       <h1 className="text-3xl font-bold mb-6">Admin Dashboard</h1>
 
       <Tabs defaultValue="clusters" className="space-y-6">
-        <TabsList className="grid grid-cols-4 w-full max-w-md">
+      <TabsList className="grid grid-cols-4 w-full max-w-md mx-auto">
           <TabsTrigger value="clusters">Clusters</TabsTrigger>
           <TabsTrigger value="floors">Floors</TabsTrigger>
           <TabsTrigger value="workstations">Workstations</TabsTrigger>
@@ -232,35 +71,21 @@ export default function AdminPage() {
           <Card>
             <CardHeader>
               <CardTitle>Add New Cluster</CardTitle>
-              <CardDescription>Create a new cluster for organizing staff</CardDescription>
+              <CardDescription>Create a new cluster</CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="grid gap-4 md:grid-cols-3">
-                <div className="space-y-2">
-                  <Label htmlFor="clusterName">Cluster Name</Label>
-                  <Input
-                    id="clusterName"
-                    value={newClusterName}
-                    onChange={(e) => setNewClusterName(e.target.value)}
-                    placeholder="e.g., Finance"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="clusterSize">Staff Size</Label>
-                  <Input
-                    id="clusterSize"
-                    type="number"
-                    value={newClusterSize}
-                    onChange={(e) => setNewClusterSize(e.target.value)}
-                    placeholder="e.g., 10"
-                  />
-                </div>
-                <div className="flex items-end">
-                  <Button onClick={handleAddCluster} className="w-full">
-                    <PlusCircle className="mr-2 h-4 w-4" />
-                    Add Cluster
-                  </Button>
-                </div>
+              <div className="space-y-4">
+                <Label htmlFor="clusterName">Cluster Name</Label>
+                <Input
+                  id="clusterName"
+                  value={newClusterName}
+                  onChange={(e) => setNewClusterName(e.target.value)}
+                  placeholder="e.g., Cluster A"
+                />
+                <Button onClick={addCluster} className="mt-4 w-full">
+                  <PlusCircle className="mr-2 h-4 w-4" />
+                  Add Cluster
+                </Button>
               </div>
             </CardContent>
           </Card>
@@ -268,7 +93,6 @@ export default function AdminPage() {
           <Card>
             <CardHeader>
               <CardTitle>Manage Clusters</CardTitle>
-              <CardDescription>View and manage existing clusters</CardDescription>
             </CardHeader>
             <CardContent>
               <Table>
@@ -276,7 +100,6 @@ export default function AdminPage() {
                   <TableRow>
                     <TableHead>ID</TableHead>
                     <TableHead>Name</TableHead>
-                    <TableHead>Staff Size</TableHead>
                     <TableHead className="text-right">Actions</TableHead>
                   </TableRow>
                 </TableHeader>
@@ -285,9 +108,12 @@ export default function AdminPage() {
                     <TableRow key={cluster.id}>
                       <TableCell>{cluster.id}</TableCell>
                       <TableCell>{cluster.name}</TableCell>
-                      <TableCell>{cluster.size}</TableCell>
                       <TableCell className="text-right">
-                        <Button variant="ghost" size="icon" onClick={() => handleDeleteCluster(cluster.id)}>
+                        <Button
+                          variant="ghost"
+                          onClick={() => deleteCluster(cluster.id)}
+                          aria-label={`Delete ${cluster.name}`}
+                        >
                           <Trash2 className="h-4 w-4" />
                         </Button>
                       </TableCell>
@@ -318,7 +144,7 @@ export default function AdminPage() {
                   />
                 </div>
                 <div className="flex items-end">
-                  <Button onClick={handleAddFloor} className="w-full">
+                  <Button onClick={addFloor} className="w-full" disabled={!newFloorName}>
                     <PlusCircle className="mr-2 h-4 w-4" />
                     Add Floor
                   </Button>
@@ -347,7 +173,7 @@ export default function AdminPage() {
                       <TableCell>{floor.id}</TableCell>
                       <TableCell>{floor.name}</TableCell>
                       <TableCell className="text-right">
-                        <Button variant="ghost" size="icon" onClick={() => handleDeleteFloor(floor.id)}>
+                        <Button variant="ghost" size="icon" onClick={() => deleteFloor(floor.id)}>
                           <Trash2 className="h-4 w-4" />
                         </Button>
                       </TableCell>
@@ -398,12 +224,12 @@ export default function AdminPage() {
                     id="hotDesks"
                     type="number"
                     value={newWorkstationHotDesks}
-                    onChange={(e) => setNewWorkstationHotDesks(e.target.value)}
+                    onChange={(e) => setNewWorkstationHotDesks(parseInt(e.target.value) || 0 )}
                     placeholder="e.g., 2"
                   />
                 </div>
                 <div className="flex items-end">
-                  <Button onClick={handleAddWorkstation} className="w-full">
+                  <Button onClick={addWorkstation} className="w-full" disabled={!newWorkstationName || newWorkstationHotDesks <= 0}>
                     <PlusCircle className="mr-2 h-4 w-4" />
                     Add Workstation
                   </Button>
@@ -436,7 +262,11 @@ export default function AdminPage() {
                       <TableCell>{workstation.name}</TableCell>
                       <TableCell>{workstation.hotDesks}</TableCell>
                       <TableCell className="text-right">
-                        <Button variant="ghost" size="icon" onClick={() => handleDeleteWorkstation(workstation.id)}>
+                        <Button
+                          variant="ghost"
+                          onClick={() => deleteWorkstation(workstation.id)}
+                          aria-label={`Delete ${workstation.name}`}
+                        >
                           <Trash2 className="h-4 w-4" />
                         </Button>
                       </TableCell>
@@ -453,27 +283,26 @@ export default function AdminPage() {
           <Card>
             <CardHeader>
               <CardTitle>Add New User</CardTitle>
-              <CardDescription>Create a new user account</CardDescription>
+              <CardDescription>Create a new user</CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="grid gap-4 md:grid-cols-4">
+              <div className="grid gap-4 md:grid-cols-2">
                 <div className="space-y-2">
-                  <Label htmlFor="userName">Name</Label>
+                  <Label htmlFor="userName">User Name</Label>
                   <Input
                     id="userName"
                     value={newUserName}
                     onChange={(e) => setNewUserName(e.target.value)}
-                    placeholder="e.g., Preston Osoro"
+                    placeholder="e.g., John Doe"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="userEmail">Email</Label>
+                  <Label htmlFor="userEmail">User Email</Label>
                   <Input
                     id="userEmail"
-                    type="email"
                     value={newUserEmail}
                     onChange={(e) => setNewUserEmail(e.target.value)}
-                    placeholder="e.g., preston.osoro@spotter.org"
+                    placeholder="e.g., john@example.com"
                   />
                 </div>
                 <div className="space-y-2">
@@ -492,7 +321,7 @@ export default function AdminPage() {
                   </Select>
                 </div>
                 <div className="flex items-end">
-                  <Button onClick={handleAddUser} className="w-full">
+                  <Button onClick={addUser} className="w-full" disabled={!newUserName || !newUserEmail || !newUserCluster}>
                     <PlusCircle className="mr-2 h-4 w-4" />
                     Add User
                   </Button>
@@ -504,7 +333,7 @@ export default function AdminPage() {
           <Card>
             <CardHeader>
               <CardTitle>Manage Users</CardTitle>
-              <CardDescription>View and manage existing users</CardDescription>
+              <CardDescription>View and manage users</CardDescription>
             </CardHeader>
             <CardContent>
               <Table>
@@ -525,7 +354,11 @@ export default function AdminPage() {
                       <TableCell>{user.email}</TableCell>
                       <TableCell>{user.cluster}</TableCell>
                       <TableCell className="text-right">
-                        <Button variant="ghost" size="icon" onClick={() => handleDeleteUser(user.id)}>
+                        <Button
+                          variant="ghost"
+                          onClick={() => deleteUser(user.id)}
+                          aria-label={`Delete ${user.name}`}
+                        >
                           <Trash2 className="h-4 w-4" />
                         </Button>
                       </TableCell>
