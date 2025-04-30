@@ -1,4 +1,4 @@
-import { RecentBooking } from "@/types/book";
+import { RecentBooking } from "@/types";
 
 export const mockBookings = [
   { id: "booking1", date: new Date(2025, 3, 10), timeSlot: "09:00 - 10:00", cluster: "HR", floor: "Floor 1", workstation: "Workstation 2", hotDesk: "HD 1" },
