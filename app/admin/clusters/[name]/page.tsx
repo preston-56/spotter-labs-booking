@@ -1,24 +1,43 @@
-"use client"
+"use client";
 
-import { useParams, useRouter } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Separator } from "@/components/ui/separator"
-import { ArrowLeft, Users, Building, AlertCircle, BarChart3, Calendar, MapPin } from "lucide-react"
-import { clusterUtilization, mockBookings, availableWorkstations } from "@/mocks/data"
-import { format } from "date-fns"
-import { fromUrlFriendly } from "@/utils/url-utils" // Import the utility function
+import { useParams, useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import {
+  ArrowLeft,
+  Users,
+  Building,
+  AlertCircle,
+  BarChart3,
+  Calendar,
+  MapPin
+} from "lucide-react";
+import {
+  clusterUtilization,
+  mockBookings,
+  availableWorkstations
+} from "@/mocks/data";
+import { format } from "date-fns";
+import { fromUrlFriendly } from "@/utils/url-utils";
 
 export default function ClusterDetailPage() {
-  const params = useParams()
-  const router = useRouter()
-  
+  const params = useParams();
+  const router = useRouter();
+
   // Use the utility function to convert URL-friendly slug back to display name
-  const clusterName = fromUrlFriendly(params.name as string)
+  const clusterName = fromUrlFriendly(params.name as string);
 
   // Find the cluster in our mock data
-  const cluster = clusterUtilization.find((c) => c.name === clusterName)
+  const cluster = clusterUtilization.find((c) => c.name === clusterName);
 
   // If cluster not found, show error state
   if (!cluster) {
@@ -39,18 +58,24 @@ export default function ClusterDetailPage() {
             <AlertCircle className="h-16 w-16 text-muted-foreground" />
           </CardContent>
           <CardFooter className="flex justify-center">
-            <Button onClick={() => router.push("/dashboard")}>Return to Dashboard</Button>
+            <Button onClick={() => router.push("/dashboard")}>
+              Return to Dashboard
+            </Button>
           </CardFooter>
         </Card>
       </div>
-    )
+    );
   }
 
   // Filter bookings for this cluster
-  const clusterBookings = mockBookings.filter((booking) => booking.cluster === clusterName)
+  const clusterBookings = mockBookings.filter(
+    (booking) => booking.cluster === clusterName
+  );
 
   // Calculate utilization percentage
-  const utilizationPercentage = Math.round((cluster.booked / cluster.total) * 100)
+  const utilizationPercentage = Math.round(
+    (cluster.booked / cluster.total) * 100
+  );
 
   return (
     <div className="container mx-auto py-10 px-4">
@@ -68,19 +93,23 @@ export default function ClusterDetailPage() {
                   utilizationPercentage > 80
                     ? "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300"
                     : utilizationPercentage > 50
-                      ? "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300"
-                      : "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300"
+                    ? "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300"
+                    : "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300"
                 }
               >
                 {utilizationPercentage}% Utilized
               </Badge>
             </div>
-            <CardDescription>Manage workstations and bookings for this cluster</CardDescription>
+            <CardDescription>
+              Manage workstations and bookings for this cluster
+            </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="grid gap-4 md:grid-cols-3">
               <div className="rounded-lg border p-4 text-center">
-                <div className="text-sm font-medium text-muted-foreground">Total Workstations</div>
+                <div className="text-sm font-medium text-muted-foreground">
+                  Total Workstations
+                </div>
                 <div className="mt-2 flex items-center justify-center">
                   <Building className="mr-2 h-4 w-4 text-indigo-500" />
                   <span className="text-2xl font-bold">{cluster.total}</span>
@@ -88,7 +117,9 @@ export default function ClusterDetailPage() {
               </div>
 
               <div className="rounded-lg border p-4 text-center">
-                <div className="text-sm font-medium text-muted-foreground">Booked</div>
+                <div className="text-sm font-medium text-muted-foreground">
+                  Booked
+                </div>
                 <div className="mt-2 flex items-center justify-center">
                   <Calendar className="mr-2 h-4 w-4 text-indigo-500" />
                   <span className="text-2xl font-bold">{cluster.booked}</span>
@@ -96,10 +127,14 @@ export default function ClusterDetailPage() {
               </div>
 
               <div className="rounded-lg border p-4 text-center">
-                <div className="text-sm font-medium text-muted-foreground">Available</div>
+                <div className="text-sm font-medium text-muted-foreground">
+                  Available
+                </div>
                 <div className="mt-2 flex items-center justify-center">
                   <MapPin className="mr-2 h-4 w-4 text-indigo-500" />
-                  <span className="text-2xl font-bold">{cluster.total - cluster.booked}</span>
+                  <span className="text-2xl font-bold">
+                    {cluster.total - cluster.booked}
+                  </span>
                 </div>
               </div>
             </div>
@@ -111,7 +146,9 @@ export default function ClusterDetailPage() {
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <span className="text-sm">Current Utilization</span>
-                  <span className="text-sm font-medium">{utilizationPercentage}%</span>
+                  <span className="text-sm font-medium">
+                    {utilizationPercentage}%
+                  </span>
                 </div>
                 <div className="h-2 w-full rounded-full bg-muted">
                   <div
@@ -119,8 +156,8 @@ export default function ClusterDetailPage() {
                       utilizationPercentage > 80
                         ? "bg-red-500"
                         : utilizationPercentage > 50
-                          ? "bg-yellow-500"
-                          : "bg-green-500"
+                        ? "bg-yellow-500"
+                        : "bg-green-500"
                     }`}
                     style={{ width: `${utilizationPercentage}%` }}
                   ></div>
@@ -146,21 +183,29 @@ export default function ClusterDetailPage() {
                       onClick={() => router.push(`/bookings/${booking.id}`)}
                     >
                       <div className="space-y-1">
-                        <div className="font-medium">{format(booking.date, "PPP")}</div>
-                        <div className="text-sm text-muted-foreground">{booking.timeSlot}</div>
+                        <div className="font-medium">
+                          {format(booking.date, "PPP")}
+                        </div>
+                        <div className="text-sm text-muted-foreground">
+                          {booking.timeSlot}
+                        </div>
                       </div>
                       <div className="space-y-1 mt-2 md:mt-0">
                         <div className="font-medium">
                           {booking.floor}, {booking.workstation}
                         </div>
-                        <div className="text-sm text-muted-foreground">{booking.hotDesk}</div>
+                        <div className="text-sm text-muted-foreground">
+                          {booking.hotDesk}
+                        </div>
                       </div>
                     </div>
                   ))}
                 </div>
               ) : (
                 <div className="rounded-lg border p-6 text-center">
-                  <p className="text-muted-foreground">No recent bookings for this cluster.</p>
+                  <p className="text-muted-foreground">
+                    No recent bookings for this cluster.
+                  </p>
                 </div>
               )}
             </div>
@@ -197,7 +242,9 @@ export default function ClusterDetailPage() {
                     <Building className="mr-2 h-4 w-4 text-muted-foreground" />
                     <span>{floor}</span>
                   </div>
-                  <Badge variant="outline">{Math.floor(count / 3)} workstations</Badge>
+                  <Badge variant="outline">
+                    {Math.floor(count / 3)} workstations
+                  </Badge>
                 </div>
               ))}
             </CardContent>
@@ -205,5 +252,5 @@ export default function ClusterDetailPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
