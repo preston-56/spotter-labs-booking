@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { initialWorkstations } from "@/app/admin/mocks/data"
+import { initialWorkstations } from "@/mocks"
 import { useToast } from "@/hooks/use-sonner"
 
 export const useWorkstations = () => {
