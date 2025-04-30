@@ -1,24 +1,3 @@
-export interface Cluster {
-    id: string;
-    name: string;
-    size: string;
-  }
-  
-  export interface Floor {
-    id: string;
-    name: string;
-  }
-  
-  export interface Workstation {
-    id: string;
-    name: string;
-  }
-  
-  export interface HotDesk {
-    id: string;
-    name: string;
-  }
-  
   export interface BookingDetails {
     cluster: string;
     floor: string;
@@ -33,4 +12,9 @@ export interface Cluster {
     time: string;
     location: string;
   }
-  
+
+  export interface UseBookingFormProps {
+    defaultBookingDetails?: Partial<BookingDetails>;
+    redirectPath?: string;
+    redirectDelay?: number;
+  }
