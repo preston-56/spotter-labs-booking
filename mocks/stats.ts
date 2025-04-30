@@ -1,4 +1,4 @@
-import { StatsData } from "@/types/booking";
+import { StatsData } from "@/types";
 
 export const statsData: StatsData = {
   totalBookings: { value: "24", subtext: "+5% from last week" },
