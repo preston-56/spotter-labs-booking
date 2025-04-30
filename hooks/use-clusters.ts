@@ -1,15 +1,8 @@
 import { useState } from "react"
-import { initialClusters } from "@/app/admin/mocks/data"
+import { initialClusters } from "@/mocks"
 import { useToast } from "@/hooks/use-sonner"
-import { toUrlFriendly, fromUrlFriendly } from "@/utils/url-utils"
-
-// Define a type for clusters
-interface Cluster {
-  id: string
-  name: string
-  size: number
-  slug?: string
-}
+import { toUrlFriendly, fromUrlFriendly } from "@/utils"
+import { Cluster } from "@/types"
 
 export const useClusters = () => {
   // Initialize with slugs for each cluster
