@@ -4,11 +4,13 @@ import { useState } from "react"
 import { Calendar } from "@/components/ui/calendar"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Clock, MapPin, CalendarIcon } from "lucide-react"
+import { Clock, MapPin, CalendarIcon, ChevronRight } from "lucide-react"
 import { mockBookings } from "@/mocks/data"
+import { useRouter } from "next/navigation"
 
 export function BookingsCalendarView() {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date())
+  const router = useRouter()
 
   // Function to check if a date has bookings
   const hasBooking = (date: Date) => {
@@ -30,6 +32,11 @@ export function BookingsCalendarView() {
         booking.date.getMonth() === date.getMonth() &&
         booking.date.getFullYear() === date.getFullYear(),
     )
+  }
+
+  // Function to handle booking click
+  const handleBookingClick = (bookingId:string | number) => {
+    router.push(`/bookings/${bookingId}`)
   }
 
   const selectedDateBookings = getBookingsForDate(selectedDate)
@@ -96,11 +103,15 @@ export function BookingsCalendarView() {
             {selectedDateBookings.length > 0 ? (
               <div className="space-y-4">
                 {selectedDateBookings.map((booking) => (
-                  <Card key={booking.id} className="overflow-hidden">
+                  <Card
+                    key={booking.id}
+                    className="overflow-hidden transition-all hover:shadow-md cursor-pointer group"
+                    onClick={() => handleBookingClick(booking.id)}
+                  >
                     <div className="bg-indigo-500 h-2"></div>
                     <CardContent className="p-4">
                       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                        <div>
+                        <div className="flex-1">
                           <h3 className="font-medium">{booking.cluster}</h3>
                           <div className="flex items-center text-sm text-muted-foreground mt-1">
                             <Clock className="mr-1 h-4 w-4" />
@@ -111,13 +122,16 @@ export function BookingsCalendarView() {
                             {booking.floor}, {booking.workstation}
                           </div>
                         </div>
-                        <div className="flex flex-wrap gap-2">
-                          <Badge variant="outline" className="bg-indigo-50 text-indigo-700 hover:bg-indigo-100">
-                            {booking.hotDesk}
-                          </Badge>
-                          <Badge variant="outline" className="bg-green-50 text-green-700 hover:bg-green-100">
-                            Confirmed
-                          </Badge>
+                        <div className="flex flex-wrap gap-2 items-center">
+                          <div>
+                            <Badge variant="outline" className="bg-indigo-50 text-indigo-700 hover:bg-indigo-100">
+                              {booking.hotDesk}
+                            </Badge>
+                            <Badge variant="outline" className="bg-green-50 text-green-700 hover:bg-green-100 ml-2">
+                              Confirmed
+                            </Badge>
+                          </div>
+                          <ChevronRight className="h-5 w-5 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
                         </div>
                       </div>
                     </CardContent>
