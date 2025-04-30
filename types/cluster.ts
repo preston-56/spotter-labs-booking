@@ -1,7 +1,8 @@
 export interface Cluster {
     id: string;
     name: string;
-    size: string;
+    size: number;
+    slug?: string
   }
   
   export interface ClusterData {
