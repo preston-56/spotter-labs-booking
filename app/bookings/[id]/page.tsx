@@ -1,23 +1,33 @@
-"use client"
+"use client";
 
-import { useParams, useRouter } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Separator } from "@/components/ui/separator"
-import { ArrowLeft, Calendar, Clock, MapPin, Building, User, CheckCircle2, AlertCircle } from "lucide-react"
-import { format } from "date-fns"
-import { mockBookings } from "@/mocks/data"
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import {
+  ArrowLeft,
+  Calendar,
+  Clock,
+  MapPin,
+  Building,
+  User,
+  CheckCircle2,
+  AlertCircle
+} from "lucide-react";
+import { format } from "date-fns";
+import BookingActions from "@/components/booking/booking-actions";
+import { useBookingDetails } from "@/hooks/use-booking-details";
 
 export default function BookingDetailPage() {
-  const params = useParams()
-  const router = useRouter()
-  const bookingId = params.id as string
-
-  // Find the booking in our mock data
-  const booking = mockBookings.find((b) => b.id === bookingId)
-
-  // If booking not found, show error state
+  const { booking, handleReschedule, handleCancel, router } =
+    useBookingDetails();
   if (!booking) {
     return (
       <div className="container mx-auto py-10 px-4">
@@ -36,11 +46,13 @@ export default function BookingDetailPage() {
             <AlertCircle className="h-16 w-16 text-muted-foreground" />
           </CardContent>
           <CardFooter className="flex justify-center">
-            <Button onClick={() => router.push("/dashboard")}>Return to Dashboard</Button>
+            <Button onClick={() => router.push("/dashboard")}>
+              Return to Dashboard
+            </Button>
           </CardFooter>
         </Card>
       </div>
-    )
+    );
   }
 
   return (
@@ -63,7 +75,9 @@ export default function BookingDetailPage() {
           <CardContent className="space-y-6">
             <div className="grid gap-4 md:grid-cols-2">
               <div className="space-y-1">
-                <div className="text-sm font-medium text-muted-foreground">Date</div>
+                <div className="text-sm font-medium text-muted-foreground">
+                  Date
+                </div>
                 <div className="flex items-center">
                   <Calendar className="mr-2 h-4 w-4 text-indigo-500" />
                   <span>{format(booking.date, "PPP")}</span>
@@ -71,7 +85,9 @@ export default function BookingDetailPage() {
               </div>
 
               <div className="space-y-1">
-                <div className="text-sm font-medium text-muted-foreground">Time Slot</div>
+                <div className="text-sm font-medium text-muted-foreground">
+                  Time Slot
+                </div>
                 <div className="flex items-center">
                   <Clock className="mr-2 h-4 w-4 text-indigo-500" />
                   <span>{booking.timeSlot}</span>
@@ -82,7 +98,9 @@ export default function BookingDetailPage() {
             <Separator />
 
             <div className="space-y-1">
-              <div className="text-sm font-medium text-muted-foreground">Location</div>
+              <div className="text-sm font-medium text-muted-foreground">
+                Location
+              </div>
               <div className="grid gap-2">
                 <div className="flex items-center">
                   <Building className="mr-2 h-4 w-4 text-indigo-500" />
@@ -100,16 +118,24 @@ export default function BookingDetailPage() {
             <Separator />
 
             <div className="space-y-1">
-              <div className="text-sm font-medium text-muted-foreground">Booked By</div>
+              <div className="text-sm font-medium text-muted-foreground">
+                Booked By
+              </div>
               <div className="flex items-center">
                 <User className="mr-2 h-4 w-4 text-indigo-500" />
                 <span>John Doe</span>
               </div>
             </div>
           </CardContent>
-          <CardFooter className="flex justify-between">
-            <Button variant="outline">Reschedule</Button>
-            <Button variant="destructive">Cancel Booking</Button>
+          <CardFooter className="flex justify-end">
+            <BookingActions
+              bookingId={booking.id}
+              initialDate={booking.date}
+              initialTimeSlot={booking.timeSlot}
+              onReschedule={handleReschedule}
+              onCancel={handleCancel}
+              size="sm"
+            />
           </CardFooter>
         </Card>
 
@@ -139,18 +165,26 @@ export default function BookingDetailPage() {
             <CardContent className="space-y-2">
               <div className="rounded-md border p-3">
                 <div className="font-medium">{booking.floor}</div>
-                <div className="text-sm text-muted-foreground">Workstation 3, HD 2</div>
-                <div className="mt-2 text-xs text-muted-foreground">Available tomorrow</div>
+                <div className="text-sm text-muted-foreground">
+                  Workstation 3, HD 2
+                </div>
+                <div className="mt-2 text-xs text-muted-foreground">
+                  Available tomorrow
+                </div>
               </div>
               <div className="rounded-md border p-3">
                 <div className="font-medium">Floor 2</div>
-                <div className="text-sm text-muted-foreground">Workstation 1, HD 1</div>
-                <div className="mt-2 text-xs text-muted-foreground">Available today</div>
+                <div className="text-sm text-muted-foreground">
+                  Workstation 1, HD 1
+                </div>
+                <div className="mt-2 text-xs text-muted-foreground">
+                  Available today
+                </div>
               </div>
             </CardContent>
           </Card>
         </div>
       </div>
     </div>
-  )
+  );
 }
