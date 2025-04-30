@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { initialFloors } from "@/app/admin/mocks/data";
+import { initialFloors } from "@/mocks";
 import { useToast } from "@/hooks/use-sonner";
 
 export const useFloors = () => {
