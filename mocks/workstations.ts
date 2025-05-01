@@ -33,4 +33,3 @@ export const availableWorkstations = {
     { id: "ws8", floor: "Floor 3", name: "Workstation 3", hotDesks: 5 },
     { id: "ws9", floor: "Floor 3", name: "Workstation 4", hotDesks: 8 }
   ];
-  
