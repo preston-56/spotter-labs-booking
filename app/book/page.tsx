@@ -27,7 +27,7 @@ export default function BookingPage() {
     handleSaveDraft
   } = useBookingForm();
 
-  const { recentBookings } = require("@/mocks/data");
+  const { recentBookings } = require("@/mocks");
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-muted/30">
