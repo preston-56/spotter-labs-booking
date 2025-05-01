@@ -9,7 +9,7 @@ import { ClusterUtilization } from "@/components/dashboard/cluster-utilization";
 import { FloorAvailability } from "@/components/dashboard/floor-availability";
 import { BookingsList } from "@/components/booking/booking-list";
 import { CalendarAvailability } from "@/components/dashboard/calendar-availability";
-import { DataFlowDiagram } from "@/components/data-flow-diagram";
+import { DataFlowDiagram } from "@/diagrams/data-flow-diagram";
 
 // Import all required mock data
 import {
