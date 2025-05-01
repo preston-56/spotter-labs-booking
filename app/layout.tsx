@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeProvider } from "@/components/theme/theme-provider";
 
 import "./globals.css";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/app-sidebar";
-import { ModeToggle } from "@/components/mode-toggle";
+import { AppSidebar } from "@/components/sidebar/app-sidebar";
+import { ModeToggle } from "@/components/theme/mode-toggle";
 
 import Link from "next/link";
 import Image from "next/image";
-import { HeaderButtons } from "@/components/header-buttons";
+import { HeaderButtons } from "@/client/header-buttons";
 import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
