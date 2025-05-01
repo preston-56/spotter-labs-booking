@@ -9,7 +9,7 @@ import { ClusterCard } from "@/components/cluster/cluster-card";
 import { AddClusterDialog } from "@/components/cluster/add-cluster-dialog";
 
 export default function ClustersPage() {
-  const { clusters, addCluster } = useClusters();
+  const { addCluster } = useClusters();
   const router = useRouter();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [newClusterName, setNewClusterName] = useState("");
