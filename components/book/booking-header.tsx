@@ -3,7 +3,6 @@
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { CalendarDays, Users, MapPin, Clock } from "lucide-react";
-
 interface Props {
   showMap: boolean;
   toggleMap: () => void;
@@ -29,7 +28,7 @@ export function BookingHeader({ showMap, toggleMap }: Props) {
               <CalendarDays className="h-4 w-4 text-indigo-500" />
               <div className="flex flex-col">
                 <span className="text-xs text-muted-foreground">
-                  Today's Bookings
+                  Today&apos;s Bookings
                 </span>
                 <span className="font-medium">12</span>
               </div>
