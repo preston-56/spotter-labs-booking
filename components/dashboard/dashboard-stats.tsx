@@ -2,11 +2,7 @@
 
 import { StatsCard } from "@/components/dashboard/stats-card";
 import { Building, CalendarIcon, Clock, Users } from "lucide-react";
-import { StatsData } from "@/types/booking";
-
-interface DashboardStatsProps {
-  stats: StatsData;
-}
+import { DashboardStatsProps } from "@/types";
 
 export function DashboardStats({ stats }: DashboardStatsProps) {
   const { totalBookings, availableWorkstations, utilizationRate, peakHours } = stats;
