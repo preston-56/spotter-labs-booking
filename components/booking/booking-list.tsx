@@ -32,7 +32,7 @@ export function BookingsList({ initialBookings }: BookingsListProps) {
         ) : (
           <div className="text-center py-6">
             <p className="text-muted-foreground">
-              You don't have any bookings yet.
+              You don&apos;t have any bookings yet.
             </p>
             <Button className="mt-4" asChild>
               <a href="/book">Book a Workstation</a>
