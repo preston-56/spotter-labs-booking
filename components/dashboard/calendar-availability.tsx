@@ -2,21 +2,49 @@
 
 import { useState } from "react";
 import { format } from "date-fns";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle
+} from "@/components/ui/card";
 import { Calendar } from "@/components/ui/calendar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { FloorWorkstations } from "@/types/booking";
-
-interface CalendarAvailabilityProps {
-  floorData: FloorWorkstations[];
-}
+import { useBooking } from "@/hooks/use-booking";
+import { CalendarAvailabilityProps } from "@/types";
 
 export function CalendarAvailability({ floorData }: CalendarAvailabilityProps) {
   const [date, setDate] = useState<Date | undefined>(new Date());
+  const [selectedWorkstation, setSelectedWorkstation] = useState<{
+    floorName: string;
+    workstation: string;
+  } | null>(null);
+
+  const { booking, handleBooking } = useBooking();
+
+  const handleWorkstationClick = (floorName: string, workstation: string) => {
+    // If already selected, deselect it
+    if (
+      selectedWorkstation &&
+      selectedWorkstation.floorName === floorName &&
+      selectedWorkstation.workstation === workstation
+    ) {
+      setSelectedWorkstation(null);
+    } else {
+      setSelectedWorkstation({ floorName, workstation });
+    }
+  };
+
+  const clearSelection = () => {
+    setSelectedWorkstation(null);
+    setDate(new Date()); // Reset to current date
+  };
 
   return (
     <div className="grid gap-4 md:grid-cols-2">
+      {/* Left card: Calendar */}
       <Card>
         <CardHeader>
           <CardTitle>Check Availability</CardTitle>
@@ -34,6 +62,7 @@ export function CalendarAvailability({ floorData }: CalendarAvailabilityProps) {
         </CardContent>
       </Card>
 
+      {/* Right card: Workstations */}
       <Card>
         <CardHeader>
           <CardTitle>Available Workstations</CardTitle>
@@ -48,16 +77,37 @@ export function CalendarAvailability({ floorData }: CalendarAvailabilityProps) {
                 <div key={floor.name} className="space-y-2">
                   <h3 className="font-medium">{floor.name}</h3>
                   <div className="grid grid-cols-3 gap-2">
-                    {floor.workstations.map((ws) => (
-                      <Badge key={ws} variant="outline" className="justify-center">
-                        {ws}
-                      </Badge>
-                    ))}
+                    {floor.workstations.map((ws) => {
+                      const isSelected =
+                        selectedWorkstation?.floorName === floor.name &&
+                        selectedWorkstation?.workstation === ws;
+
+                      return (
+                        <Badge
+                          key={ws}
+                          variant={isSelected ? "default" : "outline"}
+                          className={`cursor-pointer justify-center ${
+                            isSelected ? "bg-primary text-white" : ""
+                          }`}
+                          onClick={() => handleWorkstationClick(floor.name, ws)}
+                        >
+                          {ws}
+                        </Badge>
+                      );
+                    })}
                   </div>
                 </div>
               ))}
 
-              <Button className="w-full mt-4">Book Selected Date</Button>
+              <Button
+                className="w-full mt-4"
+                onClick={() =>
+                  handleBooking(date, selectedWorkstation, clearSelection)
+                }
+                disabled={!selectedWorkstation || booking}
+              >
+                {booking ? "Booking..." : "Book Selected Date"}
+              </Button>
             </div>
           ) : (
             <div className="flex items-center justify-center h-40">
