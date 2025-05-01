@@ -1,4 +1,4 @@
-import { SearchResultsProps } from "@/types/search"
+import { SearchResultsProps } from "@/types";
 import { SearchResultItem } from "@/components/search/search-results-item"
 
 export function SearchResults({ results, onResultClick }: SearchResultsProps) {

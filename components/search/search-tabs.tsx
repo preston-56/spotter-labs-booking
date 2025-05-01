@@ -1,5 +1,5 @@
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { SearchTabsProps } from "@/types/search"
+import { SearchTabsProps } from "@/types";
 
 export function SearchTabs({ activeTab, onTabChange }: SearchTabsProps) {
   return (

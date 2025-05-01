@@ -1,6 +1,6 @@
 import { Filter } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { SearchFooterProps } from "@/types/search"
+import { SearchFooterProps } from "@/types"
 
 export function SearchFooter({ resultCount }: SearchFooterProps) {
   return (
