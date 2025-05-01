@@ -21,7 +21,7 @@ export function BookingNotFound({ onReturn }: BookingNotFoundProps) {
       <CardHeader>
         <CardTitle className="text-center">Booking Not Found</CardTitle>
         <CardDescription className="text-center">
-          The booking you're looking for doesn't exist or has been removed.
+          The booking you&apos;re looking for doesn&apos;t exist or has been removed.
         </CardDescription>
       </CardHeader>
       <CardContent className="flex justify-center pb-6">
