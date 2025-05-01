@@ -12,7 +12,7 @@ import { FloorMap } from "@/components/booking/floor-map";
 import { RecentBookings } from "@/components/book/recent-bookings";
 import { BookingSummary } from "@/components/book/booking-summary";
 import { BookingForm } from "@/components/book/booking-form";
-
+import { recentBookings } from "@/mocks";
 import { useBookingForm } from "@/hooks/use-booking-form";
 
 export default function BookingPage() {
@@ -27,7 +27,6 @@ export default function BookingPage() {
     handleSaveDraft
   } = useBookingForm();
 
-  const { recentBookings } = require("@/mocks");
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-muted/30">
