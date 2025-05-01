@@ -3,7 +3,8 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogFooter
+  DialogFooter,
+  DialogDescription
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -16,15 +17,7 @@ import {
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { useBookingActions } from "@/hooks/use-booking-actions";
-
-export interface BookingActionsProps {
-  bookingId: string;
-  initialDate: Date;
-  initialTimeSlot: string;
-  onReschedule: (id: string, details: { date: Date; timeSlot: string }) => void;
-  onCancel: (id: string) => void;
-  size?: "sm" | "default";
-}
+import { BookingActionsProps } from "@/types";
 
 export default function BookingActions({
   bookingId,
@@ -77,6 +70,9 @@ export default function BookingActions({
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Reschedule Booking</DialogTitle>
+            <DialogDescription>
+              Choose a new date and time for your booking.
+            </DialogDescription>
           </DialogHeader>
           <div className="space-y-4 py-4">
             <div className="space-y-2">
@@ -114,6 +110,10 @@ export default function BookingActions({
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Cancel Booking</DialogTitle>
+            <DialogDescription>
+              This action cannot be undone. Are you sure you want to cancel this
+              booking?
+            </DialogDescription>
           </DialogHeader>
           <div className="py-4">
             Are you sure you want to cancel this booking?
