@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { BookingUpdateDetails } from "@/types/booking";
-import { timeSlots } from "@/mocks/data";
+import { BookingUpdateDetails } from "@/types";
+import { timeSlots } from "@/mocks";
 
 export function useBookingActions(
   bookingId: string,
