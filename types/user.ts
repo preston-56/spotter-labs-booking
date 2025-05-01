@@ -4,4 +4,7 @@ export type User = {
     email: string;
     cluster: string;
   };
-  
+
+  export interface UserInfoProps {
+    userName: string;
+  }

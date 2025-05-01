@@ -6,6 +6,7 @@ export * from "@/types/hot-desk";
 export * from "@/types/stats";
 export * from "@/types/user";
 export * from "@/types/workstation";
-
+export * from "@/types/date";
+export * from "@/types/location";
 
 
