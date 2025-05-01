@@ -10,14 +10,8 @@ import {
   CardHeader,
   CardTitle
 } from "@/components/ui/card";
-import { clusters, floors, hotDesks, workstations } from "@/mocks/data";
-import { BookingDetails } from "@/types/book";
-
-interface BookingSummaryProps {
-  bookingDetails: BookingDetails;
-  onReset: () => void;
-  onSaveDraft: () => void;
-}
+import { clusters, floors, hotDesks, workstations } from "@/mocks";
+import { BookingSummaryProps } from "@/types";
 
 export function BookingSummary({ bookingDetails, onReset, onSaveDraft }: BookingSummaryProps) {
   return (
