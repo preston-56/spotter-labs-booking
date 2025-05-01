@@ -5,7 +5,7 @@ import { Calendar } from "@/components/ui/calendar"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Clock, MapPin, CalendarIcon, ChevronRight } from "lucide-react"
-import { mockBookings } from "@/mocks/data"
+import { mockBookings } from "@/mocks"
 import { useRouter } from "next/navigation"
 
 export function BookingsCalendarView() {
@@ -34,7 +34,6 @@ export function BookingsCalendarView() {
     )
   }
 
-  // Function to handle booking click
   const handleBookingClick = (bookingId:string | number) => {
     router.push(`/bookings/${bookingId}`)
   }
