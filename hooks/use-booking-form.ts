@@ -4,13 +4,7 @@ import { useState } from "react";
 import { useToast } from "@/hooks/use-sonner";
 import { useRouter } from "next/navigation";
 import { format } from "date-fns";
-import { BookingDetails } from "@/types/book";
-
-interface UseBookingFormProps {
-  defaultBookingDetails?: Partial<BookingDetails>;
-  redirectPath?: string;
-  redirectDelay?: number;
-}
+import { BookingDetails, UseBookingFormProps } from "@/types";
 
 export const useBookingForm = ({
   defaultBookingDetails = {},

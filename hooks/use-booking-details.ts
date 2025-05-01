@@ -3,10 +3,9 @@
 import { useParams, useRouter } from "next/navigation";
 import { format } from "date-fns";
 import { useToast } from "@/hooks/use-sonner";
-import { BookingUpdateDetails } from "@/types/booking";
+import { BookingUpdateDetails, Booking } from "@/types";
 import { useEffect, useState } from "react";
-import { mockBookings } from "@/mocks/data";
-import { Booking } from "@/types/booking";
+import { mockBookings } from "@/mocks";
 
 export const useBookingDetails = () => {
   const params = useParams();

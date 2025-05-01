@@ -1,10 +1,6 @@
 import { useState } from "react";
-import { Booking, BookingUpdateDetails } from "@/types/booking";
+import { Booking, BookingUpdateDetails, UseBookingsProps } from "@/types";
 import { useToast } from "@/hooks/use-sonner";
-
-interface UseBookingsProps {
-  initialBookings: Booking[];
-}
 
 export const useBookings = ({ initialBookings }: UseBookingsProps) => {
   const [bookings, setBookings] = useState<Booking[]>(initialBookings);
