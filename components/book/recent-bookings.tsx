@@ -8,13 +8,9 @@ import {
   CardHeader,
   CardTitle
 } from "@/components/ui/card";
-import { RecentBooking } from "@/types/book";
+import { RecentBookingsSlimProps } from "@/types";
 
-interface RecentBookingsProps {
-  bookings: RecentBooking[];
-}
-
-export function RecentBookings({ bookings }: RecentBookingsProps) {
+export function RecentBookings({ bookings }: RecentBookingsSlimProps) {
   return (
     <Card className="border-indigo-200 bg-white/80 backdrop-blur-sm dark:border-indigo-950 dark:bg-black/20">
       <CardHeader className="pb-3">
