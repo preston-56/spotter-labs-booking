@@ -3,12 +3,8 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { BookingItem } from "@/components/booking/booking-item";
-import { useBookings } from "@/hooks/use-bookings";  
-import { Booking } from "@/types/booking";
-
-interface BookingsListProps {
-  initialBookings: Booking[];
-}
+import { useBookings } from "@/hooks/use-bookings";
+import { BookingsListProps } from "@/types";
 
 export function BookingsList({ initialBookings }: BookingsListProps) {
   const { bookings, rescheduleBooking, cancelBooking } = useBookings({ initialBookings });
@@ -25,11 +21,11 @@ export function BookingsList({ initialBookings }: BookingsListProps) {
         {bookings.length > 0 ? (
           <div className="space-y-4">
             {bookings.map((booking) => (
-              <BookingItem 
-                key={booking.id} 
-                booking={booking} 
-                onReschedule={rescheduleBooking} 
-                onCancel={cancelBooking} 
+              <BookingItem
+                key={booking.id}
+                booking={booking}
+                onReschedule={rescheduleBooking}
+                onCancel={cancelBooking}
               />
             ))}
           </div>
