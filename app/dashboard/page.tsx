@@ -20,7 +20,7 @@ import {
   floors,
   workstations,
   hotDesks
-} from "@/mocks/data";
+} from "@/mocks";
 
 // Create floorData structure for CalendarAvailability component
 const floorData = floors.map(floor => {
