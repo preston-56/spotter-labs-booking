@@ -2,14 +2,8 @@
 
 import { format } from "date-fns";
 
-import { Booking, BookingUpdateDetails } from "@/types/booking";
+import { BookingItemProps } from "@/types";
 import BookingActions from "@/components/booking/booking-actions";
-
-export interface BookingItemProps {
-  booking: Booking;
-  onReschedule: (bookingId: string, newDetails: BookingUpdateDetails) => void;
-  onCancel: (bookingId: string) => void;
-}
 
 export function BookingItem({
   booking,
