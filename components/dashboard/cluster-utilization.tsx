@@ -1,11 +1,7 @@
 "use client";
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { ClusterData } from "@/types/booking";
-
-interface ClusterUtilizationProps {
-  clusters: ClusterData[];
-}
+import { ClusterUtilizationProps } from "@/types";
 
 export function ClusterUtilization({ clusters }: ClusterUtilizationProps) {
   return (
