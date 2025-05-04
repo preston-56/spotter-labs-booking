@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { CalendarDays, Users, MapPin, Clock } from "lucide-react";
@@ -9,6 +10,8 @@ interface Props {
 }
 
 export function BookingHeader({ showMap, toggleMap }: Props) {
+  const router = useRouter();
+
   return (
     <header className="sticky top-0 z-10 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto">
@@ -54,8 +57,11 @@ export function BookingHeader({ showMap, toggleMap }: Props) {
               {showMap ? "Hide Map" : "View Floor Map"}
             </Button>
 
-            <Button size="sm" className=" bg-black text-white">
-              <Clock className="mr-2 h-4 w-4" />
+            <Button
+            size="sm"
+            className="bg-black text-white"
+            onClick={() => router.push("/bookings")}
+          >              <Clock className="mr-2 h-4 w-4" />
               My Bookings
             </Button>
           </div>
