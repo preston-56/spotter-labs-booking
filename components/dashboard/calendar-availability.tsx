@@ -43,7 +43,7 @@ export function CalendarAvailability({ floorData }: CalendarAvailabilityProps) {
   };
 
   return (
-    <div className="grid gap-4 md:grid-cols-2">
+    <div className="grid gap-4 md:grid-cols-2 max-w-5xl mx-auto w-full">
       {/* Left card: Calendar */}
       <Card>
         <CardHeader>
@@ -53,12 +53,14 @@ export function CalendarAvailability({ floorData }: CalendarAvailabilityProps) {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <Calendar
-            mode="single"
-            selected={date}
-            onSelect={setDate}
-            className="mx-auto"
-          />
+          <div className="flex w-full">
+            <Calendar
+              mode="single"
+              selected={date}
+              onSelect={setDate}
+              className="border rounded-md p-2 sm:p-4"
+            />
+          </div>
         </CardContent>
       </Card>
 
@@ -72,12 +74,12 @@ export function CalendarAvailability({ floorData }: CalendarAvailabilityProps) {
         </CardHeader>
         <CardContent>
           {date ? (
-            <div className="space-y-4">
+            <div className="space-y-4 border rounded-md p-4">
               {floorData.map((floor) => (
                 <div key={floor.name} className="space-y-1 sm:space-y-2">
-                <h3 className="font-medium">{floor.name}</h3>
+                  <h3 className="font-medium">{floor.name}</h3>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-1 sm:gap-2">
-                  {floor.workstations.map((ws) => {
+                    {floor.workstations.map((ws) => {
                       const isSelected =
                         selectedWorkstation?.floorName === floor.name &&
                         selectedWorkstation?.workstation === ws;
