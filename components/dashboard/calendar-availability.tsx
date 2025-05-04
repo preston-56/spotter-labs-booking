@@ -74,10 +74,10 @@ export function CalendarAvailability({ floorData }: CalendarAvailabilityProps) {
           {date ? (
             <div className="space-y-4">
               {floorData.map((floor) => (
-                <div key={floor.name} className="space-y-2">
-                  <h3 className="font-medium">{floor.name}</h3>
-                  <div className="grid grid-cols-3 gap-2">
-                    {floor.workstations.map((ws) => {
+                <div key={floor.name} className="space-y-1 sm:space-y-2">
+                <h3 className="font-medium">{floor.name}</h3>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-1 sm:gap-2">
+                  {floor.workstations.map((ws) => {
                       const isSelected =
                         selectedWorkstation?.floorName === floor.name &&
                         selectedWorkstation?.workstation === ws;
