@@ -88,9 +88,12 @@ export function CalendarAvailability({ floorData }: CalendarAvailabilityProps) {
                         <Badge
                           key={ws}
                           variant={isSelected ? "default" : "outline"}
-                          className={`cursor-pointer justify-center ${
-                            isSelected ? "bg-primary text-white" : ""
-                          }`}
+                          className={`cursor-pointer justify-center
+                            ${isSelected
+                              ? "bg-[#3182ce] text-white dark:bg-[#3182ce] dark:text-white hover:bg-[#2b6cb0] dark:hover:bg-[#2b6cb0]"
+                              : "dark:text-white dark:border-white/20 dark:hover:bg-white/10"
+                            }`
+                          }
                           onClick={() => handleWorkstationClick(floor.name, ws)}
                         >
                           {ws}
