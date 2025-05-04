@@ -41,6 +41,11 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  /* Calendar specific color variables */
+  --color-calendar-bg: var(--calendar-bg);
+  --color-calendar-highlight: var(--calendar-highlight);
+  --color-calendar-text: var(--calendar-text);
+  --color-calendar-muted: var(--calendar-muted);
 }
 
 :root {
@@ -76,6 +81,11 @@
   --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
   --sidebar-border: oklch(0.929 0.013 255.508);
   --sidebar-ring: oklch(0.704 0.04 256.788);
+    /* Calendar light mode variables */
+  --calendar-bg: oklch(1 0 0);
+  --calendar-highlight: oklch(0.488 0.243 264.376);
+  --calendar-text: oklch(0.129 0.042 264.695);
+  --calendar-muted: oklch(0.554 0.046 257.417);
 }
 
 .dark {
@@ -110,6 +120,11 @@
   --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.551 0.027 264.364);
+  /* Calendar dark mode variables - optimized for clarity without blurring context */
+  --calendar-bg: oklch(0.171 0.039 264.695); /* #171923 equivalent in OKLCH */
+  --calendar-highlight: oklch(0.519 0.182 254.568); /* #3182ce equivalent in OKLCH */
+  --calendar-text: oklch(0.97 0.02 252.37); /* #f7fafc equivalent in OKLCH */
+  --calendar-muted: oklch(0.757 0.047 254.87); /* #a0aec0 equivalent in OKLCH */
 }
 
 @layer base {
@@ -119,4 +134,38 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Calendar specific styles */
+.rdp {
+  background-color: var(--calendar-bg);
+}
+
+.rdp-day_selected,
+.rdp-day_selected:focus-visible,
+.rdp-day_selected:hover {
+  background-color: var(--calendar-highlight) !important;
+  color: oklch(1 0 0) !important; /* white */
+}
+
+.rdp-day {
+  color: var(--calendar-text);
+}
+
+.rdp-day_disabled,
+.rdp-day_outside {
+  color: var(--calendar-muted);
+}
+
+.rdp-caption {
+  color: var(--calendar-text);
+}
+
+.rdp-nav_button {
+  color: var(--calendar-text);
+  border-color: var(--border);
+}
+
+.rdp-head_cell {
+  color: var(--calendar-muted);
 }
