@@ -33,6 +33,7 @@
 ## Table of Contents
 
 - [Table of Contents](#table-of-contents)
+- [Overview](#overview)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
@@ -40,6 +41,23 @@
   - [Testing](#testing)
 
 ---
+## Overview
+
+Spotter Labs Booking is a powerful developer tool designed to streamline workspace management and enhance user experience through intuitive interfaces and robust features.
+
+This project simplifies the booking process for workstations while ensuring a cohesive design and efficient management. The core features include:
+
+- **Responsive UI Components**: Tailwind CSS integration for a cohesive design system with dark mode support.
+
+- **Dependency Management**: The `pnpm-lock.yaml` ensures consistent dependency versions, reducing bugs and compatibility issues.
+
+- **Seamless Booking Process**: Intuitive components for selecting workstations and managing bookings streamline user interactions.
+
+- **Custom Hooks**: Simplify state management for bookings, workstations, and clusters, enhancing code reusability.
+
+- **Admin Dashboard**: A structured interface for managing clusters, floors, and users, improving administrative efficiency.
+
+- **Real-time Notifications**: Toast notifications keep users informed about booking statuses and actions, enhancing engagement.
 
 ## Getting Started
 
