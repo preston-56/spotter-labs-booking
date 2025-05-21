@@ -52,13 +52,13 @@ export default function RootLayout({
                         href="/"
                         className="mr-6 flex items-center space-x-2"
                       >
-                        <Image
+                        {/* <Image
                           src="/images/spotter.png"
                           alt="Spotter Labs Logo"
                           width={40}
                           height={40}
                           className="rounded-full"
-                        />
+                        /> */}
                         <span className="font-bold">Spotter Labs</span>
                       </Link>
                     </div>
