@@ -1,6 +1,6 @@
 'use client'
 
-import { LayoutGrid, Settings, FolderCheck, X } from "lucide-react";
+import { LayoutGrid, Settings, FolderCheck } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -11,6 +11,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarGroupContent,
+  SidebarTrigger,
   useSidebar
 } from "@/components/ui/sidebar";
 import Image from "next/image";
@@ -23,12 +24,11 @@ const items = [
 ];
 
 export function AppSidebar() {
-  const { state, toggleSidebar } = useSidebar();
+  const { state } = useSidebar();
   const isMobile = useIsMobile();
 
   const handleLinkClick = () => {
     if (isMobile && state === "expanded") {
-      toggleSidebar(); // auto-close on mobile
     }
   };
 
@@ -36,17 +36,9 @@ export function AppSidebar() {
     <Sidebar>
       <SidebarContent>
         <SidebarGroup>
-
-          {/* Close Button - only on mobile */}
           {isMobile && (
             <div className="flex justify-end px-2 pt-2">
-              <button
-                onClick={toggleSidebar}
-                className="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-                aria-label="Close sidebar"
-              >
-                <X className="h-5 w-5" />
-              </button>
+              <SidebarTrigger />
             </div>
           )}
 
