@@ -1,9 +1,6 @@
-import {
-  LayoutGrid,
-  Settings,
-  FolderCheck
-} from "lucide-react";
+'use client'
 
+import { LayoutGrid, Settings, FolderCheck, X } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -13,34 +10,47 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarGroupContent
+  SidebarGroupContent,
+  useSidebar
 } from "@/components/ui/sidebar";
 import Image from "next/image";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const items = [
-  {
-    title: "Home",
-    url: "/",
-    icon: LayoutGrid
-  },
-  {
-    title: "Bookings",
-    url: "/bookings",
-    icon: FolderCheck
-  },
-  {
-    title: "Settings",
-    url: "/settings",
-    icon: Settings
-  }
+  { title: "Home", url: "/", icon: LayoutGrid },
+  { title: "Bookings", url: "/bookings", icon: FolderCheck },
+  { title: "Settings", url: "/settings", icon: Settings }
 ];
 
 export function AppSidebar() {
+  const { state, toggleSidebar } = useSidebar();
+  const isMobile = useIsMobile();
+
+  const handleLinkClick = () => {
+    if (isMobile && state === "expanded") {
+      toggleSidebar(); // auto-close on mobile
+    }
+  };
+
   return (
     <Sidebar>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel className="pl-4 pt-12 mb-10 text-xs text-muted-foreground">
+
+          {/* Close Button - only on mobile */}
+          {isMobile && (
+            <div className="flex justify-end px-2 pt-2">
+              <button
+                onClick={toggleSidebar}
+                className="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                aria-label="Close sidebar"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+          )}
+
+          <SidebarGroupLabel className="pl-4 pt-4 mb-10 text-xs text-muted-foreground">
             <div className="flex flex-col items-center">
               <Image
                 src="/images/spotter.png"
@@ -60,7 +70,11 @@ export function AppSidebar() {
               {items.map(({ title, url, icon: Icon }) => (
                 <SidebarMenuItem key={title}>
                   <SidebarMenuButton asChild>
-                    <a href={url} className="flex items-center gap-2 p-2 pl-4">
+                    <a
+                      href={url}
+                      onClick={handleLinkClick}
+                      className="flex items-center gap-2 p-2 pl-4"
+                    >
                       <Icon className="h-4 w-4" />
                       <span className="text-sm font-medium">{title}</span>
                     </a>
