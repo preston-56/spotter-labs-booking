@@ -27,7 +27,6 @@ export default function BookingPage() {
     handleSaveDraft
   } = useBookingForm();
 
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-muted/30">
       <BookingHeader showMap={showMap} toggleMap={toggleMap} />
@@ -60,7 +59,22 @@ export default function BookingPage() {
               onSaveDraft={handleSaveDraft}
             />
 
-            <RecentBookings bookings={recentBookings} />
+            <RecentBookings
+              bookings={recentBookings}
+              onSelect={(booking) => {
+                const [floor, ws] = booking.location.split(",");
+                const trimmedFloor = floor.trim();
+                const workstation =
+                  "Workstation " + ws.trim().replace("WS ", "");
+
+                setBookingDetails((prev) => ({
+                  ...prev,
+                  floor: trimmedFloor,
+                  workstation,
+                  timeSlot: booking.time
+                }));
+              }}
+            />
           </div>
         </div>
       </div>
