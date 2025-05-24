@@ -169,3 +169,7 @@
 .rdp-head_cell {
   color: var(--calendar-muted);
 }
+
+html {
+  font-size: 70%;
+}
