@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import { RecentBookingSlim } from "@/types";
 
 export const mockBookings = [
@@ -8,8 +9,12 @@ export const mockBookings = [
   { id: "booking5", date: new Date(2025, 4, 15), timeSlot: "15:00 - 16:00", cluster: "HR", floor: "Floor 3", workstation: "Workstation 3", hotDesk: "HD 4" }
 ];
 
-export const recentBookings: RecentBookingSlim[] = [
-  { date: "Apr 12, 2025", time: "09:00 - 10:00", location: "Floor 1, WS 2" },
-  { date: "Apr 10, 2025", time: "14:00 - 15:00", location: "Floor 3, WS 1" },
-  { date: "Apr 8, 2025", time: "11:00 - 12:00", location: "Floor 2, WS 2" }
-];
+export const recentBookings: RecentBookingSlim[] = mockBookings
+  .slice(-3)  /*take last 3 items from array */
+  .map((booking) => ({
+    id: booking.id,
+    date: format(booking.date, "MMM dd, yyyy"),
+    time: booking.timeSlot,
+    location: `${booking.floor}, ${booking.workstation}`
+  }));
+
