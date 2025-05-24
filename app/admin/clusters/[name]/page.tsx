@@ -37,6 +37,7 @@ export default function ClusterDetailPage() {
   const clusterBookings = mockBookings
     .filter((booking) => booking.cluster === clusterName)
     .map((booking) => ({
+      id: booking.id,
       date: format(booking.date, "MMM dd, yyyy"),
       time: booking.timeSlot,
       location: `${booking.floor}, ${booking.workstation}`
