@@ -3,7 +3,6 @@
 <p align="center"><em>Effortless workspace booking, empowering your productivity.</em></p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/last%20commit-today-brightgreen" alt="Last Commit">
   <img src="https://img.shields.io/badge/TypeScript-96.0%25-blue" alt="TypeScript">
   <img src="https://img.shields.io/badge/languages-3-orange" alt="Languages">
 </p>
