@@ -16,7 +16,6 @@ import { recentBookings } from "@/mocks";
 import { useBookingForm } from "@/hooks/use-booking-form";
 
 export default function BookingPage() {
-  // Use custom hook for all form management and toast notifications
   const {
     bookingDetails,
     setBookingDetails,
@@ -32,10 +31,15 @@ export default function BookingPage() {
       <BookingHeader showMap={showMap} toggleMap={toggleMap} />
 
       <div className="container mx-auto px-4 py-8">
-        {showMap && <FloorMap />}
+        {showMap && (
+          <div className="mb-6">
+            <FloorMap />
+          </div>
+        )}
 
-        <div className="grid gap-8 md:grid-cols-5">
-          <Card className="md:col-span-3 md:row-span-2 border-indigo-200 bg-white/80 backdrop-blur-sm dark:border-indigo-950 dark:bg-black/20">
+        <div className="grid gap-6 lg:grid-cols-5">
+          {/* Left/Main Section */}
+          <Card className="lg:col-span-3 border-indigo-200 bg-white/80 backdrop-blur-sm dark:border-indigo-950 dark:bg-black/20">
             <CardHeader>
               <CardTitle>Book a Workstation</CardTitle>
               <CardDescription>
@@ -52,7 +56,8 @@ export default function BookingPage() {
             </CardContent>
           </Card>
 
-          <div className="md:col-span-2 space-y-8">
+          {/* Right Sidebar */}
+          <div className="lg:col-span-2 flex flex-col gap-6">
             <BookingSummary
               bookingDetails={bookingDetails}
               onReset={handleReset}
