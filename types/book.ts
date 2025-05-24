@@ -8,6 +8,7 @@ export interface BookingDetails {
   }
 
   export interface RecentBookingSlim {
+    id: string;
     date: string;
     time: string;
     location: string;
