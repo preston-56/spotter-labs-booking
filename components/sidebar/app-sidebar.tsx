@@ -24,11 +24,12 @@ const items = [
 ];
 
 export function AppSidebar() {
-  const { state } = useSidebar();
+  const sidebar = useSidebar();
   const isMobile = useIsMobile();
 
   const handleLinkClick = () => {
-    if (isMobile && state === "expanded") {
+    if (isMobile && sidebar?.state === "expanded") {
+      sidebar.setOpenMobile?.(false);
     }
   };
 
