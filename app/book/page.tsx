@@ -33,7 +33,11 @@ export default function BookingPage() {
     <div className="min-h-screen bg-gradient-to-b from-background to-muted/30">
       <BookingHeader showMap={showMap} toggleMap={toggleMap} />
 
-      <div className={`container mx-auto ${isMobile ? 'px-6 py-4 max-w-full' : 'px-4 py-8 max-w-7xl'}`}>
+      <div
+        className={`container mx-auto ${
+          isMobile ? "px-6 py-4 max-w-full" : "px-4 py-8 max-w-7xl"
+        }`}
+      >
         {showMap && (
           <div className="mb-6">
             <FloorMap />
@@ -98,8 +102,8 @@ export default function BookingPage() {
               <CardHeader>
                 <CardTitle className="text-xl">Book a Workstation</CardTitle>
                 <CardDescription>
-                  Select your cluster, floor, workstation, and hot desk to make a
-                  booking.
+                  Select your cluster, floor, workstation, and hot desk to make
+                  a booking.
                 </CardDescription>
               </CardHeader>
               <CardContent>
