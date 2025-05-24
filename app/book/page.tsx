@@ -15,9 +15,9 @@ import { BookingForm } from "@/components/book/booking-form";
 import { recentBookings } from "@/mocks";
 import { useBookingForm } from "@/hooks/use-booking-form";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { RecentBookingSlim } from "@/types";
 
 export default function BookingPage() {
-  // Use custom hook for all form management and toast notifications
   const {
     bookingDetails,
     setBookingDetails,
@@ -35,17 +35,27 @@ export default function BookingPage() {
     "w-full border-indigo-200 bg-white/80 backdrop-blur-sm dark:border-indigo-950 dark:bg-black/20";
   const mobileCardClassName = `${cardClassName} max-w-md`;
 
+  // Handler for selecting recent bookings
+  const handleRecentBookingSelect = (booking: RecentBookingSlim) => {
+    const [floor, ws] = booking.location.split(",");
+    const trimmedFloor = floor.trim();
+    const workstation = "Workstation " + ws.trim().replace("WS ", "");
+    setBookingDetails((prev) => ({
+      ...prev,
+      floor: trimmedFloor,
+      workstation,
+      timeSlot: booking.time
+    }));
+  };
+
   return (
-    <div
-      className={`container mx-auto ${isMobile ? "px-2 py-4" : "px-4 py-8"}`}
-    >
-      {/* Page header with toggle for Floor Map */}
+    <div className="min-h-screen bg-gradient-to-b from-background to-muted/30">
       <BookingHeader showMap={showMap} toggleMap={toggleMap} />
 
       <div
         className={`container mx-auto ${isMobile ? "px-2 py-4" : "px-4 py-8"}`}
       >
-        {/* Floor Map - Responsive based on device */}
+        {/* Floor Map */}
         {showMap && (
           <div className={isMobile ? "flex justify-center px-6 mb-4" : "mb-8"}>
             <Card className={isMobile ? mobileCardClassName : cardClassName}>
@@ -64,12 +74,11 @@ export default function BookingPage() {
           </div>
         )}
 
-        {/* Layout switches between mobile and desktop views */}
         {isMobile ? (
-          // Mobile Layout: Stack vertically and center
-          <div className="flex flex-col gap-4 px-6">
-            {/* Booking form card */}
-            <Card className="w-full max-w-md self-center border-indigo-200 bg-white/80 backdrop-blur-sm dark:border-indigo-950 dark:bg-black/20">
+          // Mobile Layout: Centered stack
+          <div className="flex flex-col items-center gap-4 px-6">
+            {/* Booking Form */}
+            <Card className={mobileCardClassName}>
               <CardHeader className="pb-3 px-3 pt-3">
                 <CardTitle className="text-base">Book a Workstation</CardTitle>
                 <CardDescription className="text-xs">
@@ -87,7 +96,7 @@ export default function BookingPage() {
             </Card>
 
             {/* Booking Summary */}
-            <div className="w-full max-w-md self-center">
+            <div className="w-full max-w-md">
               <BookingSummary
                 bookingDetails={bookingDetails}
                 onReset={handleReset}
@@ -96,29 +105,18 @@ export default function BookingPage() {
             </div>
 
             {/* Recent Bookings */}
-            <div className="w-full max-w-md self-center">
+            <div className="w-full max-w-md">
               <RecentBookings
                 bookings={recentBookings}
-                onSelect={(booking) => {
-                  const [floor, ws] = booking.location.split(",");
-                  const trimmedFloor = floor.trim();
-                  const workstation =
-                    "Workstation " + ws.trim().replace("WS ", "");
-                  setBookingDetails((prev) => ({
-                    ...prev,
-                    floor: trimmedFloor,
-                    workstation,
-                    timeSlot: booking.time
-                  }));
-                }}
+                onSelect={handleRecentBookingSelect}
               />
             </div>
           </div>
         ) : (
-          // Desktop Layout: Grid-based
+          // Desktop Layout: Grid
           <div className="grid gap-8 md:grid-cols-5">
             {/* Booking Form */}
-            <Card className="md:col-span-3 md:row-span-2 w-full border-indigo-200 bg-white/80 backdrop-blur-sm dark:border-indigo-950 dark:bg-black/20">
+            <Card className={`${cardClassName} md:col-span-3 md:row-span-2`}>
               <CardHeader>
                 <CardTitle>Book a Workstation</CardTitle>
                 <CardDescription>
@@ -137,7 +135,7 @@ export default function BookingPage() {
 
             <div className="md:col-span-2 space-y-8">
               {/* Booking Summary */}
-              <Card className="w-full border-indigo-200 bg-white/80 backdrop-blur-sm dark:border-indigo-950 dark:bg-black/20">
+              <Card className={cardClassName}>
                 <CardContent>
                   <BookingSummary
                     bookingDetails={bookingDetails}
@@ -148,22 +146,11 @@ export default function BookingPage() {
               </Card>
 
               {/* Recent Bookings */}
-              <Card className="w-full border-indigo-200 bg-white/80 backdrop-blur-sm dark:border-indigo-950 dark:bg-black/20">
+              <Card className={cardClassName}>
                 <CardContent>
                   <RecentBookings
                     bookings={recentBookings}
-                    onSelect={(booking) => {
-                      const [floor, ws] = booking.location.split(",");
-                      const trimmedFloor = floor.trim();
-                      const workstation =
-                        "Workstation " + ws.trim().replace("WS ", "");
-                      setBookingDetails((prev) => ({
-                        ...prev,
-                        floor: trimmedFloor,
-                        workstation,
-                        timeSlot: booking.time
-                      }));
-                    }}
+                    onSelect={handleRecentBookingSelect}
                   />
                 </CardContent>
               </Card>
