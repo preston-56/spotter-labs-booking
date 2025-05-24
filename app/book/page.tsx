@@ -33,11 +33,7 @@ export default function BookingPage() {
     <div className="min-h-screen bg-gradient-to-b from-background to-muted/30">
       <BookingHeader showMap={showMap} toggleMap={toggleMap} />
 
-      <div
-        className={`container mx-auto px-4 py-8 ${
-          isMobile ? "max-w-full" : "max-w-7xl"
-        }`}
-      >
+      <div className={`container mx-auto ${isMobile ? 'px-6 py-4 max-w-full' : 'px-4 py-8 max-w-7xl'}`}>
         {showMap && (
           <div className="mb-6">
             <FloorMap />
@@ -46,18 +42,17 @@ export default function BookingPage() {
 
         {/* Conditional layout based on mobile state */}
         {isMobile ? (
-          // Mobile Layout - Single column stack
-          <div className="flex flex-col gap-4 w-full">
+          // Mobile Layout - Single column stack with significant side margins
+          <div className="flex flex-col gap-3 w-full px-8">
             {/* Main Booking Form */}
             <Card className="w-full border-indigo-200 bg-white/80 backdrop-blur-sm dark:border-indigo-950 dark:bg-black/20">
-              <CardHeader className="pb-4">
-                <CardTitle className="text-lg">Book a Workstation</CardTitle>
-                <CardDescription className="text-sm">
-                  Select your cluster, floor, workstation, and hot desk to make
-                  a booking.
+              <CardHeader className="pb-3 px-3 pt-3">
+                <CardTitle className="text-base">Book a Workstation</CardTitle>
+                <CardDescription className="text-xs">
+                  Select your cluster, floor, workstation, and hot desk.
                 </CardDescription>
               </CardHeader>
-              <CardContent className="pt-0 px-4">
+              <CardContent className="pt-0 px-3 pb-3">
                 <BookingForm
                   bookingDetails={bookingDetails}
                   setBookingDetails={setBookingDetails}
@@ -103,8 +98,8 @@ export default function BookingPage() {
               <CardHeader>
                 <CardTitle className="text-xl">Book a Workstation</CardTitle>
                 <CardDescription>
-                  Select your cluster, floor, workstation, and hot desk to make
-                  a booking.
+                  Select your cluster, floor, workstation, and hot desk to make a
+                  booking.
                 </CardDescription>
               </CardHeader>
               <CardContent>
