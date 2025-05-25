@@ -170,6 +170,8 @@
   color: var(--calendar-muted);
 }
 
-html {
-  font-size: 70%;
+@media (max-width: 639px) {
+  html {
+    font-size: 70%;
+  }
 }
