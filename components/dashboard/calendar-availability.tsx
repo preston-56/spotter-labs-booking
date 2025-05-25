@@ -74,35 +74,37 @@ export function CalendarAvailability({ floorData }: CalendarAvailabilityProps) {
         </CardHeader>
         <CardContent>
           {date ? (
-            <div className="space-y-4 border rounded-md p-4">
-              {floorData.map((floor) => (
-                <div key={floor.name} className="space-y-1 sm:space-y-2">
-                  <h3 className="font-medium">{floor.name}</h3>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-1 sm:gap-2">
-                    {floor.workstations.map((ws) => {
-                      const isSelected =
-                        selectedWorkstation?.floorName === floor.name &&
-                        selectedWorkstation?.workstation === ws;
+            <div className="border rounded-md p-4">
+              <div className="grid grid-cols-2 gap-4">
+                {floorData.map((floor) => (
+                  <div key={floor.name} className="space-y-1 sm:space-y-2">
+                    <h3 className="font-medium">{floor.name}</h3>
+                    <div className="grid grid-cols-1 gap-1 sm:gap-2 space-y-1 sm:space-y-2">
+                      {floor.workstations.map((ws) => {
+                        const isSelected =
+                          selectedWorkstation?.floorName === floor.name &&
+                          selectedWorkstation?.workstation === ws;
 
-                      return (
-                        <Badge
-                          key={ws}
-                          variant={isSelected ? "default" : "outline"}
-                          className={`cursor-pointer justify-center
-                            ${
-                              isSelected
-                                ? "bg-[#3182ce] text-white dark:bg-[#3182ce] dark:text-white hover:bg-[#2b6cb0] dark:hover:bg-[#2b6cb0]"
-                                : "dark:text-white dark:border-white/20 dark:hover:bg-white/10"
-                            }`}
-                          onClick={() => handleWorkstationClick(floor.name, ws)}
-                        >
-                          {ws}
-                        </Badge>
-                      );
-                    })}
+                        return (
+                          <Badge
+                            key={ws}
+                            variant={isSelected ? "default" : "outline"}
+                            className={`cursor-pointer justify-center text-xs sm:text-sm py-1 px-2 min-w-0 truncate w-full mb-1 sm:mb-2
+                              ${
+                                isSelected
+                                  ? "bg-[#3182ce] text-white dark:bg-[#3182ce] dark:text-white hover:bg-[#2b6cb0] dark:hover:bg-[#2b6cb0]"
+                                  : "dark:text-white dark:border-white/20 dark:hover:bg-white/10"
+                              }`}
+                            onClick={() => handleWorkstationClick(floor.name, ws)}
+                          >
+                            {ws}
+                          </Badge>
+                        );
+                      })}
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
 
               <Button
                 className="w-full mt-4"
