@@ -49,6 +49,8 @@ export function BookingsCalendarView() {
             <CardDescription>View and manage your bookings</CardDescription>
           </CardHeader>
           <CardContent>
+          <div className="flex w-full justify-center">
+
             <Calendar
               mode="single"
               selected={selectedDate}
@@ -66,6 +68,7 @@ export function BookingsCalendarView() {
                 },
               }}
             />
+            </div>
             <div className="mt-4 flex items-center text-sm text-muted-foreground">
               <div className="flex items-center">
                 <div className="mr-1 h-3 w-3 rounded-full bg-indigo-100 border border-indigo-400"></div>
