@@ -9,5 +9,5 @@ export * from "@/types/workstation";
 export * from "@/types/date";
 export * from "@/types/location";
 export * from "@/types/search";
-
+export * from "@/types/quick-actions"
 
