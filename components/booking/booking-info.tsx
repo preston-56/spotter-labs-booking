@@ -1,6 +1,13 @@
 "use client";
 
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle
+} from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { BookingInfoProps } from "@/types";
 import BookingActions from "@/components/booking/booking-actions";
@@ -9,9 +16,13 @@ import { LocationInfo } from "@/components/booking/location-info";
 import { UserInfo } from "@/components/booking/user-info";
 import { BookingStatus } from "@/components/booking/booking-status";
 
-export function BookingInfo({ booking, onReschedule, onCancel }: BookingInfoProps) {
+export function BookingInfo({
+  booking,
+  onReschedule,
+  onCancel
+}: BookingInfoProps) {
   return (
-    <Card className="md:col-span-2">
+    <Card className="w-full">
       <CardHeader>
         <div className="flex items-center justify-between">
           <CardTitle>Booking Details</CardTitle>
