@@ -13,7 +13,7 @@ export default function BookingDetailPage() {
     useBookingDetails();
 
   const handleBack = () => {
-    router.push("/bookings");
+    router.push("/book");
   };
 
   if (!booking) {
