@@ -15,12 +15,33 @@ import { DateTimeInfo } from "@/components/booking/date-time-info";
 import { LocationInfo } from "@/components/booking/location-info";
 import { UserInfo } from "@/components/booking/user-info";
 import { BookingStatus } from "@/components/booking/booking-status";
+import { initialUsers } from "@/mocks/users";
 
 export function BookingInfo({
   booking,
   onReschedule,
   onCancel
 }: BookingInfoProps) {
+  // Guard clause - return early if booking is undefined
+  if (!booking) {
+    return (
+      <Card className="w-full">
+        <CardHeader>
+          <CardTitle>Loading booking details...</CardTitle>
+          <CardDescription>
+            Please wait while we fetch your booking information.
+          </CardDescription>
+        </CardHeader>
+      </Card>
+    );
+  }
+
+  // Find the user by bookedBy field from the booking
+  const currentUser = initialUsers.find((user) => user.id === booking.bookedBy);
+
+  // Fallback to first user if bookedBy not found
+  const userName = currentUser?.name || initialUsers[0]?.name || "Unknown User";
+
   return (
     <Card className="w-full">
       <CardHeader>
@@ -40,7 +61,7 @@ export function BookingInfo({
           hotDesk={booking.hotDesk}
         />
         <Separator />
-        <UserInfo userName="John Doe" />
+        <UserInfo userName={userName} />
       </CardContent>
       <CardFooter className="flex justify-end">
         <BookingActions
