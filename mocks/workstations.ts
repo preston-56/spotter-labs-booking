@@ -14,6 +14,12 @@ export type SelectedDesk = {
   bookedBy?: string;
 };
 
+export const availableWorkstations = {
+  "Floor 1": 15,
+  "Floor 2": 10,
+  "Floor 3": 20
+};
+
 export const workstations = {
   floor1: [
     { id: "ws1-1", name: "Workstation 1" },
