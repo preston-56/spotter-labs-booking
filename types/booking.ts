@@ -6,6 +6,9 @@ export interface Booking {
   floor: string;
   workstation: string;
   hotDesk: string;
+  userId: string;
+  userName: string;
+  userEmail: string;
 }
 
 export type BookingUpdateDetails = {
@@ -47,6 +50,9 @@ export interface BookingType {
   bookedBy?: string;
   createdAt?: Date;
   updatedAt?: Date;
+  userId: string;
+  userName: string;
+  userEmail: string;
 }
 export interface BookingInfoProps {
   booking: BookingType;
