@@ -15,7 +15,6 @@ import { DateTimeInfo } from "@/components/booking/date-time-info";
 import { LocationInfo } from "@/components/booking/location-info";
 import { UserInfo } from "@/components/booking/user-info";
 import { BookingStatus } from "@/components/booking/booking-status";
-import { initialUsers } from "@/mocks/users";
 
 export function BookingInfo({
   booking,
@@ -36,11 +35,8 @@ export function BookingInfo({
     );
   }
 
-  // Find the user by bookedBy field from the booking
-  const currentUser = initialUsers.find((user) => user.id === booking.bookedBy);
-
-  // Fallback to first user if bookedBy not found
-  const userName = currentUser?.name || initialUsers[0]?.name || "Unknown User";
+  // Use the userName directly from the booking object 
+  const userName = booking.userName || "Unknown User";
 
   return (
     <Card className="w-full">
