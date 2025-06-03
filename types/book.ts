@@ -1,3 +1,5 @@
+import { Booking } from "@/types";
+
 export interface BookingDetails {
     cluster: string;
     floor: string;
@@ -12,6 +14,8 @@ export interface BookingDetails {
     date: string;
     time: string;
     location: string;
+    userName?: string;
+    userEmail?: string;
   }
 
   export interface RecentBookingsSlimProps {
@@ -32,3 +36,16 @@ export interface BookingDetails {
     onReset: () => void;
     onSaveDraft: () => void;
   }
+
+  export interface BookingWithUser extends Booking {
+    userId: string;
+    userName: string;
+    userEmail: string;
+  }
+
+  export interface CompleteBookingDetails extends BookingWithUser {
+    formattedDate: string;
+    status: 'confirmed' | 'pending' | 'cancelled';
+  }
+
+  export type BookingStatus = 'confirmed' | 'pending' | 'cancelled';
