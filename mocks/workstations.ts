@@ -52,7 +52,7 @@ export const initialWorkstations = [
 
 // Enhanced workstation data with booking information
 export const initialWorkstationsData: WorkstationData[] = [
-  // Floor 1 - 3 Workstations (Total: ~20 desks, Available: 15, Booked: 5)
+  // Floor 1 - 3 Workstations
   {
     id: "ws1",
     floor: "Floor 1",
@@ -99,9 +99,9 @@ export const initialWorkstationsData: WorkstationData[] = [
     id: "ws2-3",
     floor: "Floor 2",
     name: "Workstation 3",
-    hotDesks: 3,
-    bookedDesks: [1], // 1 booked
-    bookedBy: { 1: "Sarah K." }
+    hotDesks: 4,
+    bookedDesks: [1,3], // 2 booked
+    bookedBy: { 1: "Sarah K.", 3: "Jane Smith" }
   },
   {
     id: "ws2-4",
