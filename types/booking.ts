@@ -4,11 +4,18 @@ export interface Booking {
   timeSlot: string;
   cluster: string;
   floor: string;
+  workstationId: string;
   workstation: string;
+  workstations: string;
+  deskIndex: number;
   hotDesk: string;
+  user: string;
   userId: string;
   userName: string;
   userEmail: string;
+  bookedBy:string;
+  createdAt:Date;
+  updatedAt:Date;
 }
 
 export type BookingUpdateDetails = {
@@ -45,11 +52,15 @@ export interface BookingType {
   cluster: string;
   floor: string;
   workstation: string;
+  workstations: string;
+  workstationId: string;
   hotDesk: string;
+  deskIndex: number;
   status?: "confirmed" | "pending" | "cancelled";
   bookedBy?: string;
   createdAt?: Date;
   updatedAt?: Date;
+  user: string;
   userId: string;
   userName: string;
   userEmail: string;
