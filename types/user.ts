@@ -3,8 +3,12 @@ export type User = {
     name: string;
     email: string;
     cluster: string;
-  };
+};
 
-  export interface UserInfoProps {
-    userName: string;
-  }
+export interface UserInfoProps {
+    workstationId?: string;
+    deskIndex: number;
+    workstations?: any[];
+    userName?: string;
+    userEmail?: string;
+};
