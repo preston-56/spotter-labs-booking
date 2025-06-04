@@ -4,6 +4,7 @@ export interface Workstation {
   floor: string;
   name: string;
   hotDesks: number;
+  bookedBy: string;
 }
 export interface WorkstationSelectionProps {
   selectedValues: {
