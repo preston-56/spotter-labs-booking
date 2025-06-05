@@ -35,8 +35,8 @@ export function BookingInfo({
     );
   }
 
-  // Use the userName directly from the booking object 
-  const userName = booking.userName || "Unknown User";
+  // Use the userName directly from the booking object
+  const userName = booking.userName || booking.user || "Unknown User";
 
   return (
     <Card className="w-full">
@@ -57,7 +57,11 @@ export function BookingInfo({
           hotDesk={booking.hotDesk}
         />
         <Separator />
-        <UserInfo userName={userName} />
+        <UserInfo
+          workstationId={booking.workstationId}
+          deskIndex={booking.deskIndex}
+          userName={userName} // Pass userName as fallback
+        />
       </CardContent>
       <CardFooter className="flex justify-end">
         <BookingActions
