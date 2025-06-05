@@ -1,18 +1,25 @@
 import { format } from "date-fns";
-import { RecentBookingSlim} from "@/types";
+import { RecentBookingSlim, Booking } from "@/types";
 
-export const mockBookings = [
+export const mockBookings: Booking[] = [
   {
     id: "booking1",
     date: new Date(2025, 3, 10),
     timeSlot: "09:00 - 10:00",
     cluster: "HR",
     floor: "Floor 1",
+    workstationId: "ws-hr-f1-2",
     workstation: "Workstation 2",
+    workstations: "Workstation 2",
+    deskIndex: 1,
     hotDesk: "HD 1",
+    user: "Preston Osoro",
     userId: "user1",
     userName: "Preston Osoro",
-    userEmail: "preston.osoro@spotter.org"
+    userEmail: "preston.osoro@spotter.org",
+    bookedBy: "user1",
+    createdAt: new Date(2025, 3, 9),
+    updatedAt: new Date(2025, 3, 9),
   },
   {
     id: "booking2",
@@ -20,11 +27,18 @@ export const mockBookings = [
     timeSlot: "14:00 - 15:00",
     cluster: "IT & Facilities",
     floor: "Floor 3",
+    workstationId: "ws-it-f3-1",
     workstation: "Workstation 1",
+    workstations: "Workstation 1",
+    deskIndex: 2,
     hotDesk: "HD 2",
+    user: "Bob Johnson",
     userId: "user3",
     userName: "Bob Johnson",
-    userEmail: "bob.johnson@spotter.org"
+    userEmail: "bob.johnson@spotter.org",
+    bookedBy: "user3",
+    createdAt: new Date(2025, 3, 11),
+    updatedAt: new Date(2025, 3, 11),
   },
   {
     id: "booking3",
@@ -32,11 +46,18 @@ export const mockBookings = [
     timeSlot: "11:00 - 12:00",
     cluster: "Marketing",
     floor: "Floor 2",
+    workstationId: "ws-mkt-f2-5",
     workstation: "Workstation 5",
+    workstations: "Workstation 5",
+    deskIndex: 3,
     hotDesk: "HD 3",
+    user: "Preston Osoro",
     userId: "user1",
     userName: "Preston Osoro",
-    userEmail: "preston.osoro@spotter.org"
+    userEmail: "preston.osoro@spotter.org",
+    bookedBy: "user1",
+    createdAt: new Date(2025, 3, 14),
+    updatedAt: new Date(2025, 3, 14),
   },
   {
     id: "booking4",
@@ -44,11 +65,18 @@ export const mockBookings = [
     timeSlot: "15:00 - 16:00",
     cluster: "Finance",
     floor: "Floor 2",
+    workstationId: "ws-fin-f2-3",
     workstation: "Workstation 3",
+    workstations: "Workstation 3",
+    deskIndex: 4,
     hotDesk: "HD 4",
+    user: "Jane Smith",
     userId: "user2",
     userName: "Jane Smith",
-    userEmail: "jane.smith@spotter.org"
+    userEmail: "jane.smith@spotter.org",
+    bookedBy: "user2",
+    createdAt: new Date(2025, 3, 14),
+    updatedAt: new Date(2025, 3, 14),
   },
   {
     id: "booking5",
@@ -56,11 +84,18 @@ export const mockBookings = [
     timeSlot: "15:00 - 16:00",
     cluster: "HR",
     floor: "Floor 3",
+    workstationId: "ws-hr-f3-3",
     workstation: "Workstation 3",
+    workstations: "Workstation 3",
+    deskIndex: 4,
     hotDesk: "HD 4",
+    user: "Preston Osoro",
     userId: "user1",
     userName: "Preston Osoro",
-    userEmail: "preston.osoro@spotter.org"
+    userEmail: "preston.osoro@spotter.org",
+    bookedBy: "user1",
+    createdAt: new Date(2025, 4, 14),
+    updatedAt: new Date(2025, 4, 14),
   }
 ];
 
