@@ -13,9 +13,9 @@ export interface Booking {
   userId: string;
   userName: string;
   userEmail: string;
-  bookedBy:string;
-  createdAt:Date;
-  updatedAt:Date;
+  bookedBy: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export type BookingUpdateDetails = {
@@ -45,25 +45,8 @@ export interface BookingItemProps {
   onReschedule: (bookingId: string, newDetails: BookingUpdateDetails) => void;
   onCancel: (bookingId: string) => void;
 }
-export interface BookingType {
-  id: string;
-  date: Date;
-  timeSlot: string;
-  cluster: string;
-  floor: string;
-  workstation: string;
-  workstations: string;
-  workstationId: string;
-  hotDesk: string;
-  deskIndex: number;
+export interface BookingType extends Booking {
   status?: "confirmed" | "pending" | "cancelled";
-  bookedBy?: string;
-  createdAt?: Date;
-  updatedAt?: Date;
-  user: string;
-  userId: string;
-  userName: string;
-  userEmail: string;
 }
 export interface BookingInfoProps {
   booking: BookingType;
