@@ -14,8 +14,16 @@ import { Badge } from "@/components/ui/badge";
 import {
   WorkstationData,
   SelectedDesk,
-  initialWorkstationsData
+  initialWorkstationsData,
+  initialUsers
 } from "@/mocks";
+
+// Helper function to get user name from ID
+const getUserName = (userId: string | undefined): string => {
+  if (!userId) return "Unknown User";
+  const user = initialUsers.find((u) => u.id === userId);
+  return user ? user.name : userId; // Fallback to ID if user not found
+};
 
 export function FloorMap() {
   const [workstations, setWorkstations] = useState<WorkstationData[]>(
@@ -68,7 +76,7 @@ export function FloorMap() {
             bookedDesks: [...ws.bookedDesks, selectedDesk.deskIndex],
             bookedBy: {
               ...ws.bookedBy,
-              [selectedDesk.deskIndex]: "You"
+              [selectedDesk.deskIndex]: "currentUser" // Use actual current user ID
             }
           };
         }
@@ -155,7 +163,7 @@ export function FloorMap() {
                 <div key={floor} className="rounded-lg border p-4">
                   <div className="mb-3 flex items-center justify-between">
                     <h3 className="font-medium">{floor}</h3>
-                    <Badge variant="outline" className="text-xs">
+                    <Badge variant="outline" className="text-xs bg-green-500">
                       {floorTotalDesks - floorBookedDesks}/{floorTotalDesks}
                     </Badge>
                   </div>
@@ -173,7 +181,9 @@ export function FloorMap() {
                             (_, hdIndex) => {
                               const isBooked =
                                 workstation.bookedDesks.includes(hdIndex);
-                              const bookedBy = workstation.bookedBy[hdIndex];
+                              const bookedByUserId =
+                                workstation.bookedBy[hdIndex];
+                              const bookedByName = getUserName(bookedByUserId);
 
                               return (
                                 <button
@@ -188,7 +198,7 @@ export function FloorMap() {
                                   }`}
                                   title={
                                     isBooked
-                                      ? `Booked by ${bookedBy}`
+                                      ? `Booked by ${bookedByName}`
                                       : "Available - Click to book"
                                   }
                                 >
@@ -231,9 +241,9 @@ export function FloorMap() {
               <div>
                 <p className="text-sm text-muted-foreground mb-4">
                   This desk is currently booked by{" "}
-                  <strong>{selectedDesk.bookedBy}</strong>
+                  <strong>{getUserName(selectedDesk.bookedBy)}</strong>
                 </p>
-                {selectedDesk.bookedBy === "You" && (
+                {selectedDesk.bookedBy === "currentUser" && (
                   <Button
                     onClick={handleReleaseDesk}
                     variant="destructive"
