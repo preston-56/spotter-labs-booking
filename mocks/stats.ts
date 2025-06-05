@@ -2,7 +2,7 @@ import { StatsData } from "@/types";
 
 export const statsData: StatsData = {
   totalBookings: { value: "24", subtext: "+5% from last week" },
-  availableWorkstations: { value: "35", subtext: "Across all floors" },
+  availableWorkstations: { value: "18", subtext: "Across all floors" },
   utilizationRate: { value: "65%", subtext: "+10% from last month" },
   peakHours: { value: "10:00 - 14:00", subtext: "Highest booking demand" }
 };
